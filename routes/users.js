@@ -5,8 +5,10 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
+// app.js goes to here when url: "/api/users"
+
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
@@ -14,6 +16,18 @@ module.exports = (db) => {
       .then(data => {
         const users = data.rows;
         res.json({ users });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+  router.get("/:id", (req, res) => {
+    db.query(`SELECT * FROM users WHERE id = $1;`, [req.params.id])
+      .then(data => {
+        const user = data.rows;
+        res.json({ user });
       })
       .catch(err => {
         res
