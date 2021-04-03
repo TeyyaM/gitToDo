@@ -1,4 +1,4 @@
--- Drop and recreate todos table (Example)
+-- Drop and recreate todos table
 
 DROP TABLE IF EXISTS todos CASCADE;
 CREATE TABLE todos (
@@ -9,6 +9,5 @@ CREATE TABLE todos (
   note VARCHAR(255),
   date_added TIMESTAMP DEFAULT NOW(),
   date_completed TIMESTAMP DEFAULT NULL,
-  deadline DATE,
-  complete BOOLEAN NOT NULL DEFAULT FALSE
+  deadline DATE DEFAULT NULL
 );
