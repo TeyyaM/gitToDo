@@ -1,0 +1,60 @@
+-- Todos table seeds here
+INSERT INTO todos (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  category VARCHAR(5) NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  note VARCHAR(255) DEFAULT NULL,
+  deadline DATE DEFAULT NULL,
+  date_added TIMESTAMP DEFAULT NOW(),
+  date_completed TIMESTAMP DEFAULT NULL,
+  complete BOOLEAN NOT NULL DEFAULT FALSE
+) VALUES (1, 'watch', 'Lord of the Rings', 'all three marathon!');
+
+INSERT INTO todos (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  category VARCHAR(5) NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  note VARCHAR(255) DEFAULT NULL,
+  deadline DATE DEFAULT NULL,
+  date_added TIMESTAMP DEFAULT NOW(),
+  date_completed TIMESTAMP DEFAULT NULL,
+  complete BOOLEAN NOT NULL DEFAULT FALSE
+) VALUES (1, 'buy', 'ten thousand ladybugs', 'amazon?');
+
+INSERT INTO todos (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  category VARCHAR(5) NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  note VARCHAR(255) DEFAULT NULL,
+  deadline DATE DEFAULT NULL,
+  date_added TIMESTAMP DEFAULT NOW(),
+  date_completed TIMESTAMP DEFAULT NULL,
+  complete BOOLEAN NOT NULL DEFAULT FALSE
+) VALUES (1, 'buy', 'honey');
+
+INSERT INTO todos (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  category VARCHAR(5) NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  note VARCHAR(255) DEFAULT NULL,
+  deadline DATE DEFAULT NULL,
+  date_added TIMESTAMP DEFAULT NOW(),
+  date_completed TIMESTAMP DEFAULT NULL,
+  complete BOOLEAN NOT NULL DEFAULT FALSE
+) VALUES (1, 'read', 'newspaper');
+
+INSERT INTO todos (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  category VARCHAR(5) NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  note VARCHAR(255) DEFAULT NULL,
+  deadline DATE DEFAULT NULL,
+  date_added TIMESTAMP DEFAULT NOW(),
+  date_completed TIMESTAMP DEFAULT NULL,
+  complete BOOLEAN NOT NULL DEFAULT FALSE
+) VALUES (1, 'eat', 'starbucks');
