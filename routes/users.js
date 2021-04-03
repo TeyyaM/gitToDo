@@ -35,5 +35,19 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+  // Might replace above with this
+  router.get("/:id/todos", (req, res) => {
+    db.query(`SELECT * FROM todos
+      WHERE user_id = $1;`, [req.params.id])
+      .then(data => {
+        const user_todos = data.rows;
+        res.json({ user_todos });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
   return router;
 };
