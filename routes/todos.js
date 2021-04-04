@@ -53,7 +53,7 @@ module.exports = (db) => {
 
   router.post("/new", (req, res) => {
     // get user_id from cookie
-    const user_id = 2;
+    const user_id = req.session.user_id;
     // get category from APIs
     const category_id = 5;
     console.log(req.body.todo);
