@@ -3,7 +3,7 @@
 
 <head>
   <!-- Meta Information -->
-  <title>Todo - Home Page</title>
+  <title>BucketListing - Home Page</title>
 
   <!-- External CSS Placeholder-->
   <!-- <link rel="stylesheet" href="the h ref" type="text/css"> -->
@@ -25,7 +25,7 @@
 </head>
 
 <body>
-  <h1>Hello World!</h1>
+  <h1>BucketListing</h1>
   <nav>
   </nav>
 
@@ -34,6 +34,14 @@
   </header>
 
   <main>
+    <h3>Add A Todo</h3>
+    <form action="/api/todos/new" method="POST">
+      <div>
+        <!-- <label for="todoName">Enter a URL:</label> -->
+        <input class="form-control" type="text" name="todo" placeholder="Tell us what you want todo!">
+        <button type="submit">List it!</button>
+      </div>
+    </form>
 
   </main>
 
