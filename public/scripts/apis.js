@@ -9,11 +9,6 @@ const imdb = require('imdb-api');
 const omdbKey = process.env.omdb_key;
 const yelpKey = process.env.yelpKey;
 
-
-
-
-
-
 const checkYelp = (string) => {
   const searchRequest = {
     term: string,
@@ -31,8 +26,6 @@ const checkYelp = (string) => {
       console.log(e);
     });
 };
-
-
 
 const checkBooks = (string) => {
   return fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${string}`)
@@ -57,10 +50,6 @@ const checkIMDB = (string) => {
 }
 
 // checkIMDB('The Lord of the Rings: The Two Towers').then((res) => console.log("Hello there", res));
-
-/* Test Code, first is a book, second isn't */
-// checkBooks('The Things They Carried').then((res) => console.log(res));
-// checkBooks('Starbucks').then((res) => console.log(res));
 
 module.exports = {
   checkYelp,
