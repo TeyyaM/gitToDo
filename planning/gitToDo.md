@@ -20,11 +20,12 @@ POST - /todos/:userid/:todoid - Update specific To Do that is on a specific user
 ## HTML pages
 
 1. Header - contains logo/business name + username && logout button || login button
-  * is appended to the top of every HTML pages
-2. Login - Input user name and password + login button
-3. todo-new - page to add new To Do items to the list
-4. todo-index - Page showing all of our to-do list
-5. todo-edit - Editing page for delete/complete/edit
+  * is appended to the top of every HTML pages.
+2. Login - Input user name and password + login button.
+3. todo-new - page to add new To Do items to the list.
+4. todo-index - Page showing all of our to-do list categories.
+5. todo-list - Page showing a specific to-do list category.
+5. todo-edit - Editing page for delete/complete/edit.
 
 ## API
 
