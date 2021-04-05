@@ -57,21 +57,20 @@ module.exports = (db) => {
     const user_id = req.session.user_id;
     const todo_name = req.body.todo;
     // get category from APIs
-    const category_id = 5;
-    // final version will grab the todo name and category id from res
-    findCategory(todo_name).then(res => console.log(res));
-
-    db.query(`INSERT INTO todos (user_id, category_id, name)
-      VALUES ($1, $2, $3) RETURNING id, user_id;`, [user_id, category_id, todo_name])
-      .then((data) => {
-        // get user_id and the todo's id from data
-        res.redirect(`/api/todos/${data.rows[0].user_id}/${data.rows[0].id}`);
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+    // get category and specific name from APIS
+    findCategory(todo_name).then(returnObj => {
+      db.query(`INSERT INTO todos (user_id, category_id, name)
+      VALUES ($1, $2, $3) RETURNING id, user_id;`, [user_id, returnObj.category, returnObj.name])
+        .then((data) => {
+          // get user_id and the todo's id from data
+          res.redirect(`/api/todos/${data.rows[0].user_id}/${data.rows[0].id}`);
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
+    });
   });
   return router;
 };

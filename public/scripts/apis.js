@@ -8,8 +8,11 @@ const imdb = require('imdb-api');
 
 const omdbKey = process.env.omdb_key;
 const yelpKey = process.env.yelpKey;
+const shopKey = process.env.shop_key;
+
 
 const checkYelp = (string) => {
+
   const searchRequest = {
     term: string,
     location: 'vancouver' // Can change to be based on user location later
@@ -28,6 +31,7 @@ const checkYelp = (string) => {
 };
 
 const checkBooks = (string) => {
+
   return fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${string}`)
     .then(res => res.json())
     .then(json => json.items[0].volumeInfo.title)
@@ -37,18 +41,17 @@ const checkBooks = (string) => {
 };
 
 const checkIMDB = (string) => {
+
   const cli = new imdb.Client({ apiKey: omdbKey });
 
   return cli.get({ 'name': string }).then(response => {
-    // console.log(response.title);
     return response.title;
   })
     .catch(e => {
       return (e.name);
-      // return 'Movie not found!'
     });
 
-}
+};
 
 module.exports = {
   checkYelp,

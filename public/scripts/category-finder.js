@@ -6,6 +6,10 @@ const {
 const stringSimilarity = require("string-similarity");
 
 async function findCategory(input) {
+
+  const threshold = 0.8;
+  const string = input.toLowerCase();
+
   const categories = {
     eat: {
       num: 2,
@@ -19,26 +23,33 @@ async function findCategory(input) {
       num: 4,
       apiFunc: checkIMDB
     },
-    buy: {
-      num: 5
-      // apiFunc: function
-    }
   }
-  const string = input.toLowerCase();
+
+  const buy = {
+    num: 5
+    // apiFunc: add in future when launched, no paid apis for proof of concepts
+  }
+
+  // will call apis and check similarities in order, if there is a perfect match, it returns
   for (const key in categories) {
-    // need all the keys to have functions before we can loop, then can remove the if statement
-    if (categories[key].apiFunc) {
-      categories[key].name = await categories[key].apiFunc(string)
-      categories[key].similarity = stringSimilarity.compareTwoStrings(string, categories[key].name.toLowerCase())
+    const keyObj = categories[key]
+    keyObj.name = await keyObj.apiFunc(string);
+    keyObj.similarity = stringSimilarity.compareTwoStrings(string, keyObj.name.toLowerCase());
+    if (keyObj.similarity === 1) {
+      return { category: keyObj.num, name: keyObj.name };
     }
   }
 
-  // final version will return the name of the object (to be inserted into the todo) and category_id
-  // final version will check similarities in order, if there is a perfect match, it returns
-  // if there is no perfect match, it returns the closest
-  // final version will also have minimun value for similarity otherwise default to misc category
+  // if there is no perfect match, it returns the closest if greater than threshold
+  for (const key in categories) {
+    const keyObj = categories[key]
+    if (keyObj.similarity > threshold) {
+      return { category: keyObj.num, name: keyObj.name };
+    }
+  }
 
-  return (categories);
+  // otherwise default to misc category (currently buy instead, due to apis not being free)
+  return { category: buy.num, name: string };
 };
 
 //Delete later, test code
