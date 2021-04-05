@@ -31,6 +31,7 @@ const findCategory = function (string)  {
 // };
 
 
+// require('dotenv').config({path: '../../.env'}); This is for when you're calling it from the scripts directory.
 require('dotenv').config();
 
 const yelp = require('yelp-fusion');
@@ -45,6 +46,7 @@ const checkYelp = function (string) {
   const client = yelp.client(apiKey);
 
   return client.search(searchRequest).then(response => {
+    console.log("responce", JSON.parse(JSON.stringify(response.jsonBody.businesses[0])));
     const firstResult = response.jsonBody.businesses[0];
     const prettyJson = JSON.stringify(firstResult, null, 4);
     console.log('log is ' + JSON.parse(prettyJson).name);
