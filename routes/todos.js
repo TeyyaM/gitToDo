@@ -7,6 +7,7 @@
 
 const express = require('express');
 const router = express.Router();
+const { findCategory } = require("../public/scripts/category-finder");
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
@@ -52,13 +53,16 @@ module.exports = (db) => {
   });
 
   router.post("/new", (req, res) => {
-    // get user_id from cookie
+
     const user_id = req.session.user_id;
+    const todo_name = req.body.todo;
     // get category from APIs
     const category_id = 5;
-    console.log(req.body.todo);
+    // final version will grab the todo name and category id from res
+    findCategory(todo_name).then(res => console.log(res));
+
     db.query(`INSERT INTO todos (user_id, category_id, name)
-      VALUES ($1, $2, $3) RETURNING id, user_id;`, [user_id, category_id, req.body.todo])
+      VALUES ($1, $2, $3) RETURNING id, user_id;`, [user_id, category_id, todo_name])
       .then((data) => {
         // get user_id and the todo's id from data
         res.redirect(`/api/todos/${data.rows[0].user_id}/${data.rows[0].id}`);
