@@ -57,7 +57,7 @@ module.exports = (db) => {
     const user_id = req.session.user_id;
     // Not required for a todo to be INSERTED
     const optionalInput = {
-      note: req.body.notes,
+      note: req.body.note,
       deadline: req.body.deadline
     }
     let queryStart = 'INSERT INTO todos (user_id, category_id, name';
