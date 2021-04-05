@@ -34,11 +34,13 @@
   </header>
 
   <main>
-    <h3>Add A Todo</h3>
+    <h3>What do you want todo?</h3>
     <form action="/api/todos/new" method="POST">
       <div>
-        <label for="todo">What do you want todo?</label>
-        <input type="text" name="todo" placeholder="Tell us what you want todo!">
+        <label for="todo">Goal:</label>
+        <input type="text" name="todo" placeholder="Key-words only :D">
+        <label for="note">Notes (optional):</label>
+        <input type="text" name="note" placeholder="Tell us what you want todo!">
         <button type="submit">List it!</button>
       </div>
     </form>

@@ -15,8 +15,8 @@ const morgan = require('morgan');
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
-const db = new Pool(dbParams);
-db.connect();
+const pool = new Pool(dbParams);
+pool.connect();
 
 // Cookie for simulating login
 const cookieSession = require("cookie-session");
@@ -50,10 +50,10 @@ const loginRoutes = require("./routes/login");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
-app.use("/api/todos", todosRoutes(db));
-app.use("/api/login", loginRoutes(db));
-// app.use("/api/register", registerRoutes(db));
+app.use("/api/users", usersRoutes(pool));
+app.use("/api/todos", todosRoutes(pool));
+app.use("/api/login", loginRoutes(pool));
+// app.use("/api/register", registerRoutes(pool));
 // Note: mount other resources here, using the same pattern above
 
 

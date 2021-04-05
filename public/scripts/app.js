@@ -2,8 +2,8 @@ $(() => {
   $.ajax({
     method: "GET",
     url: "/api/users"
-  }).done((users) => {
-    for (user of users) {
+  }).done((res) => {
+    for (user of res.users) {
       $("<div>").text(user.name).appendTo($("body"));
     }
   });;
@@ -12,8 +12,8 @@ $(() => {
   $.ajax({
     method: "GET",
     url: "/api/todos"
-  }).done((todos) => {
-    for (todo of todos) {
+  }).done((res) => {
+    for (todo of res.todos) {
       $("<div>").text(todo.name).appendTo($("body"));
     }
   });;
@@ -22,8 +22,8 @@ $(() => {
   $.ajax({
     method: "GET",
     url: "/api/login"
-  }).done((users) => {
-    for (user of users) {
+  }).done((res) => {
+    for (user of res.users) {
       $("<div>").text(user.name).appendTo($("body"));
     }
   });;

@@ -55,14 +55,28 @@ module.exports = (db) => {
   router.post("/new", (req, res) => {
 
     const user_id = req.session.user_id;
-    const todo_name = req.body.todo;
-    // get category from APIs
-    // get category and specific name from APIS
-    findCategory(todo_name).then(returnObj => {
-      db.query(`INSERT INTO todos (user_id, category_id, name)
-      VALUES ($1, $2, $3) RETURNING id, user_id;`, [user_id, returnObj.category, returnObj.name])
+    // Not required for a todo to be INSERTED
+    const optionalInput = {
+      note: req.body.notes,
+      deadline: req.body.deadline
+    }
+    let queryStart = 'INSERT INTO todos (user_id, category_id, name';
+    let queryMid = ') VALUES ($1, $2, $3';
+    let queryEnd = ') RETURNING id, user_id';
+    findCategory(req.body.todo).then(returnObj => {
+      // get category and specific name from APIS
+      const queryArr = [user_id, returnObj.category, returnObj.name];
+      for (key in optionalInput) {
+        if (optionalInput[key]) {
+          queryArr.push(optionalInput[key]);
+          queryStart += `, ${key}`
+          queryMid += `, $${queryArr.length}`;
+        }
+      }
+      const queryString = queryStart + queryMid + queryEnd;
+      db.query(queryString, queryArr)
         .then((data) => {
-          // get user_id and the todo's id from data
+          // get user_id and the todo's id from data RETURNING data
           res.redirect(`/api/todos/${data.rows[0].user_id}/${data.rows[0].id}`);
         })
         .catch(err => {
@@ -74,3 +88,4 @@ module.exports = (db) => {
   });
   return router;
 };
+
