@@ -36,43 +36,32 @@ const checkBooks = (string) => {
     .catch(err => console.error(err));
 };
 
-const findCategory = (input) => {
-  const eat = 2;
-  const read = 3;
-  const watch = 4;
-  const buy = 5;
+async function findCategory(input) {
+  const categories = {
+
+    eat: {
+      num: 2
+      // result: the string,
+      // similarity: the number
+    },
+    read: { num: 3 },
+    watch: { num: 4 },
+    buy: { num: 5 }
+  }
   const string = input.toLowerCase();
-  const results = {};
-  return checkYelp(string)
-    .then((res) => {
-      results.eat = stringSimilarity.compareTwoStrings(string, res.toLowerCase())
-      console.log(results.eat)
-    })
-    .catch(err => console.error(err, 'with Yelp'))
-    .then(() => {
-      if (results.eat = 1) {
-        return eat;
-      }
-    })
-    .then(() => {
-      checkBooks(string)
-    })
-    .then((res) => {
-      console.log(res);
-      results.read = stringSimilarity.compareTwoStrings(string, res.toLowerCase());
-    })
-    .then(() => {
-      if (results.read = 1) {
-        return read;
-      }
-    })
-    .then(() => console.log(results));
+
+  categories.eat.result = await checkYelp(string);
+  categories.read.result = await checkBooks(string);
+  categories.eat.similarity = stringSimilarity.compareTwoStrings(string, categories.eat.result.toLowerCase());
+  categories.read.similarity = stringSimilarity.compareTwoStrings(string, categories.read.result.toLowerCase());
+  console.log(categories);
 };
+
 //Delete later, test code
 // checkYelp('Jenga').then((res) => console.log(res));
 // checkBooks('The Things They Carried').then((res) => console.log(res));
 // checkBooks('Starbucks').then((res) => console.log(res));
-findCategory('starbucks').then((res) => console.log(res));
+findCategory('starbucks')
+// findCategory('starbucks').then((res) => console.log(res));
 
 module.exports = { checkYelp, checkBooks };
-
