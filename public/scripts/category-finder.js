@@ -16,8 +16,8 @@ async function findCategory(input) {
       apiFunc: checkBooks
     },
     watch: {
-      num: 4
-      // apiFunc: checkIMDB
+      num: 4,
+      apiFunc: checkIMDB
     },
     buy: {
       num: 5
@@ -28,10 +28,11 @@ async function findCategory(input) {
   for (const key in categories) {
     // need all the keys to have functions before we can loop, then can remove the if statement
     if (categories[key].apiFunc) {
-      categories[key].name = await categories[key].apiFunc(string);
-      categories[key].similarity = stringSimilarity.compareTwoStrings(string, categories[key].name.toLowerCase());
+      categories[key].name = await categories[key].apiFunc(string)
+      categories[key].similarity = stringSimilarity.compareTwoStrings(string, categories[key].name.toLowerCase())
     }
   }
+
   // final version will return the name of the object (to be inserted into the todo) and category_id
   // final version will check similarities in order, if there is a perfect match, it returns
   // if there is no perfect match, it returns the closest
@@ -43,6 +44,8 @@ async function findCategory(input) {
 //Delete later, test code
 
 // findCategory('starbucks').then((res) => console.log(res));
+// findCategory('The Lord of the Rings').then((res) => console.log(res));
+// findCategory('The Lord of the Ringssssss').then((res) => console.log(res));
 // findCategory('The Things They Carried').then((res) => console.log(res));
 
 module.exports = { findCategory };

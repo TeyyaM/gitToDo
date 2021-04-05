@@ -22,8 +22,8 @@ const checkYelp = (string) => {
     const prettyJson = JSON.stringify(firstResult, null, 4);
     return JSON.parse(prettyJson).name;
   })
-    .catch(e => {
-      console.log(e);
+    .catch(() => {
+      return 'yelp api error';
     });
 };
 
@@ -31,25 +31,24 @@ const checkBooks = (string) => {
   return fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${string}`)
     .then(res => res.json())
     .then(json => json.items[0].volumeInfo.title)
-    .catch(err => console.error(err));
+    .catch(() => {
+      return 'book api error';
+    });
 };
 
 const checkIMDB = (string) => {
   const cli = new imdb.Client({ apiKey: omdbKey });
 
-  // cli.get({'name': 'The Lord of the Rings: The Two Towers'}).then(console.log);
-
   return cli.get({ 'name': string }).then(response => {
-    console.log(response.title);
+    // console.log(response.title);
     return response.title;
   })
     .catch(e => {
-      console.log(e);
+      return (e.name);
+      // return 'Movie not found!'
     });
 
 }
-
-// checkIMDB('The Lord of the Rings: The Two Towers').then((res) => console.log("Hello there", res));
 
 module.exports = {
   checkYelp,
