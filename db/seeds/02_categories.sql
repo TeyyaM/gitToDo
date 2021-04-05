@@ -3,7 +3,7 @@
 INSERT INTO categories (
 name
 ) VALUES ('miscellaneous'),
-('read'),
 ('eat'),
-('buy'),
-('watch');
+('read'),
+('watch'),
+('buy');
