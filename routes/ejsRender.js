@@ -49,12 +49,14 @@ module.exports = (pool) => {
     WHERE user_id = $1 AND id = $2;`;
     const queryParams = [req.session.user_id, req.params.todo_id];
     pool.query(query, queryParams)
-    const templateVars = {
-      user_id: req.session.user_id,
-      index: true,
-      todos: data.rows
-    };
-    res.render("todo_show", templateVars);
+      .then(data => {
+        const templateVars = {
+          user_id: req.session.user_id,
+          index: false,
+          todos: data.rows[0]
+        };
+        res.render("todo_show", templateVars);
+      });
   });
 
   router.post("/todos/new", (req, res) => {
