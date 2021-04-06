@@ -58,10 +58,49 @@ app.use("/api/login", loginRoutes(pool));
 
 
 // Home page
-// Warning: avoid creating more routes in this file!
-// Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  res.render("index");
+  const templateVars = {
+    user_id: req.session.user_id,
+    index: true
+  };
+  res.render("index", templateVars);
+});
+// category selector page
+app.get("/category", (req, res) => {
+  const templateVars = {
+    user_id: req.session.user_id,
+    index: true
+  };
+  res.render("category", templateVars);
+});
+// specific category list page
+app.get("/category/:category_id", (req, res) => {
+  const templateVars = {
+    user_id: req.session.user_id,
+    index: true
+  };
+  res.render("list", templateVars);
+});
+// Specific to do page
+app.get("/todos/:todo_id", (req, res) => {
+  const templateVars = {
+    user_id: req.session.user_id,
+    index: true
+  };
+  res.render("todo", templateVars);
+});
+
+// Add a To Do
+app.post("/", (req, res) => {
+
+});
+// Add a To Do
+app.post("/", (req, res) => {
+
+});
+// Edit To Do
+app.post("/todos/:todo_id", (req, res) => {
+
 });
 
 app.listen(PORT, () => {
