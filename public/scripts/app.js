@@ -1,46 +1,15 @@
 $(() => {
-  $.ajax({
-    method: "GET",
-    url: "/api/users"
-  }).done((res) => {
-    for (user of res.users) {
-      $("<div>").text(user.name).appendTo($("body"));
-    }
-  });;
-});
-$(() => {
-  $.ajax({
-    method: "GET",
-    url: "/api/todos"
-  }).done((res) => {
-    for (todo of res.todos) {
-      $("<div>").text(todo.name).appendTo($("body"));
-    }
-  });;
-});
-$(() => {
-  $.ajax({
-    method: "GET",
-    url: "/api/login"
-  }).done((res) => {
-    for (user of res.users) {
-      $("<div>").text(user.name).appendTo($("body"));
-    }
-  });;
-});
-
-$(() => {
-
-  $("#new-todo").on("submit", event => {
+  console.log("DOCUMENT IS READY");
+  $("#new-todo ").on("submit", event => {
     event.preventDefault();                  // Prevent default action
     // const $serialized = $(this).serialize(); //Create jQuery string out of form data (text=....)
-    let textLength = $('#new-todo').val().length;
+    let textLength = $('#todo-name').val().length;
     console.log("TEXT length", textLength);
-    // $("#err").slideUp();
-    // if (textLength <= 0) { // Empty tweet handler
-    //   const errShort = $(`<p id="err">Error. You can't send empty tweet </p>`);
-    //   $('#length-err-msg').prepend(errShort);
-    //   $("#err").slideDown();
+    $("#err").slideUp();
+    if (textLength <= 0) { // Empty tweet handler
+      const errShort = $(`<p id="err">Error. You can't have empty todo name</p>`);
+      $('#new-todo').prepend(errShort);
+      $("#err").slideDown();
 
     // } else if (textLength > 140) {  // Overlength tweet handler
     //   const errLong = $(`<p id="err">Error. Your tweet is too long. Make it shorter </p>`);
@@ -57,7 +26,39 @@ $(() => {
     //           $('.counter').text("140"); // Reset counter to default value after submit
     //         });
     //     });
-    // }
+    }
   });
 
 })
+
+// $(() => {
+//   $.ajax({
+//     method: "GET",
+//     url: "/api/users"
+//   }).done((res) => {
+//     for (user of res.users) {
+//       $("<div>").text(user.name).appendTo($("body"));
+//     }
+//   });;
+// });
+// $(() => {
+//   $.ajax({
+//     method: "GET",
+//     url: "/api/todos"
+//   }).done((res) => {
+//     for (todo of res.todos) {
+//       $("<div>").text(todo.name).appendTo($("body"));
+//     }
+//   });;
+// });
+// $(() => {
+//   $.ajax({
+//     method: "GET",
+//     url: "/api/login"
+//   }).done((res) => {
+//     for (user of res.users) {
+//       $("<div>").text(user.name).appendTo($("body"));
+//     }
+//   });;
+// });
+

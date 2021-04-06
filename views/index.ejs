@@ -17,8 +17,8 @@
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" data-auto-a11y="true"></script>
 
   <!-- App JS -->
-  <script type="text/javascript" src="/scripts/app.js"></script>
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
 
   <!-- For Mobile Sizing-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,7 +32,7 @@
       <form id="new-todo" action="/api/todos/new" method="POST">
         <div>
           <label for="todo">Goal:</label>
-          <input type="text" name="todo" placeholder="Key-words only :D">
+          <input type="text" id="todo-name" name="todo" placeholder="Key-words only :D">
           <label for="note">Notes (optional):</label>
           <input type="text" name="note" placeholder="Tell us what you want todo!">
           <button type="submit">List it!</button>
