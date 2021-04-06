@@ -43,35 +43,23 @@ app.use(cookieSession({
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const usersRoutes = require("./routes/users");
-const todosRoutes = require("./routes/todos");
+const usersApiRoutes = require("./routes/users");
+const todosApiRoutes = require("./routes/todos");
 const loginRoutes = require("./routes/login");
+const todosRoutes = require("./routes/ejsRender");
 // const registerRoutes = require("./routes/register");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(pool));
-app.use("/api/todos", todosRoutes(pool));
-app.use("/login", loginRoutes(pool));
+app.use("/api/users", usersApiRoutes(pool));
+app.use("/api/todos", todosApiRoutes(pool));
+app.use("/login", loginRoutes(pool))
+app.use("/", todosRoutes(pool));
 // app.use("/register", registerRoutes(pool));
 // Note: mount other resources here, using the same pattern above
 
 
-// Home page
-app.get("/", (req, res) => {
-  const templateVars = {
-    user_id: req.session.user_id,
-    index: true
-  };
-  res.render("index", templateVars);
-});
-app.get("/todo_categories", (req, res) => {
-  const templateVars = {
-    user_id: req.session.user_id,
-    index: true
-  };
-  res.render("todo_categories", templateVars);
-});
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
