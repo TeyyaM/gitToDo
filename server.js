@@ -58,14 +58,19 @@ app.use("/login", loginRoutes(pool));
 
 
 // Home page
-// Warning: avoid creating more routes in this file!
-// Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
   const templateVars = {
     user_id: req.session.user_id,
     index: true
   };
   res.render("index", templateVars);
+});
+app.get("/todo_categories", (req, res) => {
+  const templateVars = {
+    user_id: req.session.user_id,
+    index: true
+  };
+  res.render("todo_categories", templateVars);
 });
 
 app.listen(PORT, () => {
