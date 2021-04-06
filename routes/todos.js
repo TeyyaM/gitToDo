@@ -7,7 +7,6 @@
 
 const express = require('express');
 const router = express.Router();
-const { newTodoQuery } = require("../public/scripts/helpers");
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
@@ -52,36 +51,6 @@ module.exports = (db) => {
       });
   });
 
-  router.post("/new", (req, res) => {
-
-    const inputObj = {
-      user_id: req.session.user_id,
-      todoInput: req.body.todo,
-      // Parameters not required for a todo to be INSERTED
-      optional: {
-        note: req.body.note,
-        deadline: req.body.deadline
-      }
-    }
-    if (!inputObj.todoInput) {
-      // Important! Add error message later
-      console.log('Empty Todo!');
-    } else {
-      newTodoQuery(inputObj)
-        .then(returnObj => {
-          db.query(returnObj.str, returnObj.arr)
-            .then(data => {
-              // get user_id and the todo's id from data RETURNING data
-              res.redirect(`/api/todos/${data.rows[0].user_id}/${data.rows[0].id}`);
-            })
-            .catch(err => {
-              res
-                .status(500)
-                .json({ error: err.message });
-            });
-        })
-    }
-  });
   return router;
 };
 
