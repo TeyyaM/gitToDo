@@ -52,8 +52,8 @@ const loginRoutes = require("./routes/login");
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(pool));
 app.use("/api/todos", todosRoutes(pool));
-app.use("/api/login", loginRoutes(pool));
-// app.use("/api/register", registerRoutes(pool));
+app.use("/login", loginRoutes(pool));
+// app.use("/register", registerRoutes(pool));
 // Note: mount other resources here, using the same pattern above
 
 
@@ -61,7 +61,11 @@ app.use("/api/login", loginRoutes(pool));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  res.render("index");
+  const templateVars = {
+    user_id: req.session.user_id,
+    index: true
+  };
+  res.render("index", templateVars);
 });
 
 app.listen(PORT, () => {

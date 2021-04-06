@@ -55,38 +55,45 @@ module.exports = (db) => {
   router.post("/new", (req, res) => {
 
     const user_id = req.session.user_id;
+    const todoInput = req.body.todo;
     // Parameters not required for a todo to be INSERTED
     const optionalInput = {
       note: req.body.note,
       deadline: req.body.deadline
     }
-
-    let queryStart = 'INSERT INTO todos (user_id, category_id, name';
-    let queryMid = ') VALUES ($1, $2, $3';
-    let queryEnd = ') RETURNING id, user_id';
-    findCategory(req.body.todo).then(returnObj => {
-      // get category and specific name from APIS
-      const queryArr = [user_id, returnObj.category, returnObj.name];
-      for (key in optionalInput) {
-        if (optionalInput[key]) {
-          queryArr.push(optionalInput[key]);
-          queryStart += `, ${key}`
-          queryMid += `, $${queryArr.length}`;
+    if (!todoInput) {
+      // Important! Add error message later
+      console.log('Empty Todo!');
+    } else {
+      // Important! Modularize later
+      let queryStart = 'INSERT INTO todos (user_id, category_id, name';
+      let queryMid = ') VALUES ($1, $2, $3';
+      let queryEnd = ') RETURNING id, user_id';
+      findCategory(todoInput).then(returnObj => {
+        // get category and specific name from APIS
+        const queryArr = [user_id, returnObj.category, returnObj.name];
+        for (key in optionalInput) {
+          if (optionalInput[key]) {
+            queryArr.push(optionalInput[key]);
+            queryStart += `, ${key}`
+            queryMid += `, $${queryArr.length}`;
+          }
         }
-      }
-      const queryString = queryStart + queryMid + queryEnd;
-      db.query(queryString, queryArr)
-        .then((data) => {
-          // get user_id and the todo's id from data RETURNING data
-          res.redirect(`/api/todos/${data.rows[0].user_id}/${data.rows[0].id}`);
-        })
-        .catch(err => {
-          res
-            .status(500)
-            .json({ error: err.message });
-        });
-    });
+        const queryString = queryStart + queryMid + queryEnd;
+        db.query(queryString, queryArr)
+          .then((data) => {
+            // get user_id and the todo's id from data RETURNING data
+            res.redirect(`/api/todos/${data.rows[0].user_id}/${data.rows[0].id}`);
+          })
+          .catch(err => {
+            res
+              .status(500)
+              .json({ error: err.message });
+          });
+      });
+    }
   });
+
   return router;
 };
 

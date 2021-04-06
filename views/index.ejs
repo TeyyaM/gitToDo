@@ -25,27 +25,21 @@
 </head>
 
 <body>
-  <h1>BucketListing</h1>
-  <nav>
-  </nav>
+  <%- include('../partials/_header') %>
 
-  <header>
+    <main class="first-main">
+      <h3>What do you want todo?</h3>
+      <form action="/api/todos/new" method="POST">
+        <div>
+          <label for="todo">Goal:</label>
+          <input type="text" name="todo" placeholder="Key-words only :D">
+          <label for="note">Notes (optional):</label>
+          <input type="text" name="note" placeholder="Tell us what you want todo!">
+          <button type="submit">List it!</button>
+        </div>
+      </form>
 
-  </header>
-
-  <main>
-    <h3>What do you want todo?</h3>
-    <form action="/api/todos/new" method="POST">
-      <div>
-        <label for="todo">Goal:</label>
-        <input type="text" name="todo" placeholder="Key-words only :D">
-        <label for="note">Notes (optional):</label>
-        <input type="text" name="note" placeholder="Tell us what you want todo!">
-        <button type="submit">List it!</button>
-      </div>
-    </form>
-
-  </main>
+    </main>
 
 </body>
 
