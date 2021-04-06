@@ -55,47 +55,44 @@ module.exports = (pool) => {
     });
   });
 
-  router.post("todos/:todo_id/edit", (req, res) => {});
-
-    pool.query(query, queryParams)
-      .then(data => {
-        const templateVars = {
-          user_id: req.session.user_id,
-          index: false,
-          todos: data.rows[0]
-        };
-        res.render("todo_show", templateVars);
-      });
+  router.post("todos/:todo_id/edit", (req, res) => {
+    pool.query(query, queryParams).then((data) => {
+      const templateVars = {
+        user_id: req.session.user_id,
+        index: false,
+        todos: data.rows[0],
+      };
+      res.render("todo_show", templateVars);
+    });
   });
 
   router.post("/todos/new", (req, res) => {
-
     const inputObj = {
       user_id: req.session.user_id,
       todoInput: req.body.todo,
       // Parameters not required for a todo to be INSERTED
       optional: {
         note: req.body.note,
-        deadline: req.body.deadline
-      }
-    }
+        deadline: req.body.deadline,
+      },
+    };
     if (!inputObj.todoInput) {
       // Important! Add error message later
-      console.log('Empty Todo!');
+      console.log("Empty Todo!");
     } else {
-      newTodoQuery(inputObj)
-        .then(returnObj => {
-          pool.query(returnObj.str, returnObj.arr)
-            .then(data => {
-              // get user_id and the todo's id from data RETURNING data
-              res.redirect(`/api/todos/${data.rows[0].user_id}/${data.rows[0].id}`);
-            })
-            .catch(err => {
-              res
-                .status(500)
-                .json({ error: err.message });
-            });
-        })
+      newTodoQuery(inputObj).then((returnObj) => {
+        pool
+          .query(returnObj.str, returnObj.arr)
+          .then((data) => {
+            // get user_id and the todo's id from data RETURNING data
+            res.redirect(
+              `/api/todos/${data.rows[0].user_id}/${data.rows[0].id}`
+            );
+          })
+          .catch((err) => {
+            res.status(500).json({ error: err.message });
+          });
+      });
     }
   });
 
