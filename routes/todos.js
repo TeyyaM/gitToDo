@@ -7,7 +7,7 @@
 
 const express = require('express');
 const router = express.Router();
-const { findCategory } = require("../public/scripts/category-finder");
+const { newTodoQuery } = require("../public/scripts/helpers");
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
@@ -54,46 +54,34 @@ module.exports = (db) => {
 
   router.post("/new", (req, res) => {
 
-    const user_id = req.session.user_id;
-    const todoInput = req.body.todo;
-    // Parameters not required for a todo to be INSERTED
-    const optionalInput = {
-      note: req.body.note,
-      deadline: req.body.deadline
+    const inputObj = {
+      user_id: req.session.user_id,
+      todoInput: req.body.todo,
+      // Parameters not required for a todo to be INSERTED
+      optional: {
+        note: req.body.note,
+        deadline: req.body.deadline
+      }
     }
-    if (!todoInput) {
+    if (!inputObj.todoInput) {
       // Important! Add error message later
       console.log('Empty Todo!');
     } else {
-      // Important! Modularize later
-      let queryStart = 'INSERT INTO todos (user_id, category_id, name';
-      let queryMid = ') VALUES ($1, $2, $3';
-      let queryEnd = ') RETURNING id, user_id';
-      findCategory(todoInput).then(returnObj => {
-        // get category and specific name from APIS
-        const queryArr = [user_id, returnObj.category, returnObj.name];
-        for (key in optionalInput) {
-          if (optionalInput[key]) {
-            queryArr.push(optionalInput[key]);
-            queryStart += `, ${key}`
-            queryMid += `, $${queryArr.length}`;
-          }
-        }
-        const queryString = queryStart + queryMid + queryEnd;
-        db.query(queryString, queryArr)
-          .then((data) => {
-            // get user_id and the todo's id from data RETURNING data
-            res.redirect(`/api/todos/${data.rows[0].user_id}/${data.rows[0].id}`);
-          })
-          .catch(err => {
-            res
-              .status(500)
-              .json({ error: err.message });
-          });
-      });
+      newTodoQuery(inputObj)
+        .then(returnObj => {
+          db.query(returnObj.str, returnObj.arr)
+            .then(data => {
+              // get user_id and the todo's id from data RETURNING data
+              res.redirect(`/api/todos/${data.rows[0].user_id}/${data.rows[0].id}`);
+            })
+            .catch(err => {
+              res
+                .status(500)
+                .json({ error: err.message });
+            });
+        })
     }
   });
-
   return router;
 };
 
