@@ -1,0 +1,27 @@
+<header class="nav-bar">
+  <nav>
+    <div>
+      <a href="/">BucketListing</a>
+      <%if (user_id) {%>
+        <span>Hey there, @username!</span>
+        <%}%>
+    </div>
+    <%if (user_id) {%>
+      <div>
+        <a href="/logout">Logout</a>
+        <%if (user_id && index) {%>
+          <a href=<%=`/api/todos/${user_id}`%>>View Todos</a>
+          <%} else {%>
+            <a href="/">Add Todos</a>
+            <%}%>
+      </div>
+      <%}%>
+        <%if (!user_id) {%>
+          <div>
+            <a href="/register">Register</a>
+            <!-- hardcoded to log in as user_id = 1 -->
+            <a href="/login/1">Login</a>
+          </div>
+          <%}%>
+  </nav>
+</header>

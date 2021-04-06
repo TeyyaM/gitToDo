@@ -52,8 +52,8 @@ const loginRoutes = require("./routes/login");
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(pool));
 app.use("/api/todos", todosRoutes(pool));
-app.use("/api/login", loginRoutes(pool));
-// app.use("/api/register", registerRoutes(pool));
+app.use("/login", loginRoutes(pool));
+// app.use("/register", registerRoutes(pool));
 // Note: mount other resources here, using the same pattern above
 
 
@@ -64,43 +64,6 @@ app.get("/", (req, res) => {
     index: true
   };
   res.render("index", templateVars);
-});
-// category selector page
-app.get("/category", (req, res) => {
-  const templateVars = {
-    user_id: req.session.user_id,
-    index: true
-  };
-  res.render("category", templateVars);
-});
-// specific category list page
-app.get("/category/:category_id", (req, res) => {
-  const templateVars = {
-    user_id: req.session.user_id,
-    index: true
-  };
-  res.render("list", templateVars);
-});
-// Specific to do page
-app.get("/todos/:todo_id", (req, res) => {
-  const templateVars = {
-    user_id: req.session.user_id,
-    index: true
-  };
-  res.render("todo", templateVars);
-});
-
-// Add a To Do
-app.post("/", (req, res) => {
-
-});
-// Add a To Do
-app.post("/", (req, res) => {
-
-});
-// Edit To Do
-app.post("/todos/:todo_id", (req, res) => {
-
 });
 
 app.listen(PORT, () => {
