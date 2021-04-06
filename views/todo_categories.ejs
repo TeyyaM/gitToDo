@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta Information -->
+  <title>BucketListing - Home Page</title>
+
+  <!-- External CSS Placeholder-->
+  <!-- <link rel="stylesheet" href="the h ref" type="text/css"> -->
+
+  <!-- App CSS -->
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+
+  <!-- External JS -->
+  <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" data-auto-a11y="true"></script>
+
+  <!-- App JS -->
+  <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+
+  <!-- For Mobile Sizing-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <%- include('partials/_header') %>
+    <main class="first-main">
+    <div class="categories-container">
+      <div class="bruno">
+        <button type="button">Watch</button>
+        <button type="button">Eat</button>
+      </div>
+      <div class="bruno">
+        <button type="button">Read</button>
+        <button type="button">Buy</button>
+      </div>
+      <div class="mars">
+        <button type="button">All</button>
+        <button type="button">Misc</button>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

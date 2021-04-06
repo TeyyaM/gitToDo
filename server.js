@@ -65,6 +65,13 @@ app.get("/", (req, res) => {
   };
   res.render("index", templateVars);
 });
+app.get("/todo_categories", (req, res) => {
+  const templateVars = {
+    user_id: req.session.user_id,
+    index: true
+  };
+  res.render("todo_categories", templateVars);
+});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
