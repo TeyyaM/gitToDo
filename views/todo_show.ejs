@@ -24,11 +24,46 @@
 <body>
   <%- include('partials/_header') %>
     <main class="first-main">
-      <article id="specific-todo">
+      <article id="specific-todo" class="mars">
+      <header>
+      <%if (user_id && todo_id) {%>
+        <h2>
+          <%= todo.category.toUpperCase() %>
+        </h2>
+        <h3>
+          <%= todo.name %>
+        </h3>
+        <%}%>
+      </header>
+      <!--  Add details later for different categories  -->
+      <%if (todo.note) {%>
+        <label for="note">Note:</label>
+        <p>
+          <%= todo.note %>
+        </p>
+        <%}%>
+      <%if (todo.deadline) {%>
+      <label for="note">Deadline:</label>
+      <p>
+        <%= todo.deadline %>
+      </p>
+      <%}%>
+      <%if (todo.date_added) {%>
+      <label for="note">Created At:</label>
+      <p>
+        <%= todo.date_added.toDateString()%>
+      </p>
+      <%}%>
+     <%if (todo.date_completed) {%>
+      <label for="note">Completed On:</label>
+      <p>
+        <%= todo.date_completed.toDateString() %>
+      </p>
+      <%}%>
         <!-- show note -->
         <!-- Add the deadline-->
-        <form id="category-change" data-to-id="1">
-          <label for="category">Choose category:</label>
+        <form id="category-change" data-to-id="<%=todo_id%>">
+          <label for="category">Change category:</label>
           <select name="category" id="category">
             <option value="2">Eat</option>
             <option value="3">Read</option>
@@ -36,10 +71,18 @@
             <option value="5">Buy</option>
           </select>
           <br><br>
-          <input type="submit" value="Submit">
+          <input type="submit" value="Change Category">
+        </form>
+        <%if (!todo.date_completed) {%>
+            <form action="/todos/<%=todo_id%>/complete" method="POST">
+              <button type="submit">Complete!</button>
+            </form>
+          <%}%>
+        <form action="/todos/<%=todo_id%>/delete" method="POST">
+          <button type="submit">Delete</button>
         </form>
     </article>
-  </main>
+    </main>
 </body>
 
 </html>
