@@ -41,15 +41,18 @@ module.exports = (pool) => {
   });
 
   router.get("/todos/:todo_id", (req, res) => {
-    const query = `SELECT *
+    const query = `SELECT todos.name, todos.deadline, todos.date_added,
+    todos.date_completed, todos.note, categories.name as category
     FROM todos
-    WHERE user_id = $1 AND id = $2;`;
+    JOIN categories ON categories.id = todos.category_id
+    WHERE todos.user_id = $1 AND todos.id = $2;`;
     const queryParams = [req.session.user_id, req.params.todo_id];
     pool.query(query, queryParams).then((data) => {
       const templateVars = {
         user_id: req.session.user_id,
+        todo_id: req.params.todo_id,
         index: false,
-        todos: data.rows[0],
+        todo: data.rows[0]
       };
       res.render("todo_show", templateVars);
     });
