@@ -23,7 +23,7 @@ module.exports = (pool) => {
   router.get("/todos/categories/:category_id", (req, res) => {
     const category_id = req.params.category_id;
     const queryParams = [req.session.user_id];
-    let query = `SELECT todos.name, deadline, categories.name as cat_name
+    let query = `SELECT todos.id, todos.name, deadline, categories.name as cat_name
     FROM todos
     JOIN categories ON todos.category_id = categories.id
     WHERE user_id = $1`;
