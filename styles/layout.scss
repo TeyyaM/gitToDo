@@ -27,7 +27,7 @@ body {
   align-self: center;
   justify-self: center;
   flex-direction: column;
-  width: 30%;
+  width: 600px;
   border: 15px solid green;
   padding: 50px;
   margin: auto;
@@ -38,6 +38,7 @@ body {
     text-decoration: none;
     text-transform: uppercase;
     border: 5px solid purple;
+
   }
   a:hover {
     background-color: rgb(107, 107, 238);
@@ -46,14 +47,17 @@ body {
 }
 
 .bruno {
-  padding: 1em;
+
+  display: flex;
+  border: 5px solid black;
 
 }
 
 .mars {
   display: flex;
   flex-direction: column;
-  padding: 1em;
+
+  border: 5px solid black;
 }
 
 main.first-main {
