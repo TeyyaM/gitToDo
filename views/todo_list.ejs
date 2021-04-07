@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
   <!-- Meta Information -->
   <title>BucketListing - Home Page</title>
@@ -24,16 +27,53 @@
 <body>
   <%- include('partials/_header') %>
     <main class="first-main">
-    <div class="category-todo-container">
-      <%for (const todo of todos) {%>
-        <span> <%=todo.name%> </span>
-        <%}%>
-        <!DOCTYPE html>
-        <html lang="en">
+      <section id="tweets">
 
+        <div class="category-todo-container">
+          <%for (const todo of todos) {%>
+            <div id="todo-left">
+              <h3>
+                <%=todo.cat_name%>
+              </h3>
+            </div>
+            <h1>
+              <%=todo.name%>
+            </h1>
+            <%}%>
+        </div>
+
+      </section>
       </div>
-    </div>
-  </main>
+    </main>
 </body>
 
 </html>
+
+<!-- <article class="tweet">
+<header>
+<h4> <img src="${tweetData.user.avatars}"> ${tweetData.user.name} </h4>
+<h5> ${tweetData.user.handle} </h5>
+</header>
+<p>${escape(tweetData.content.text)}</p>
+<footer>
+<div class="date">${timeSinceTweet(tweetData.created_at)}</div>
+<div class="likes"> <i class="fab fa-font-awesome-flag"></i> <i class="fas fa-retweet"></i><i class="fas fa-heart"></i></div>
+</footer>
+</article>
+
+<main class="container">
+<section class="new-tweet">
+<h2>Compose Tweet</h2>
+<form action="/tweets/" method="POST">
+<label for="tweet-text">What are you humming about?</label> <div id="length-err-msg"></div>
+<textarea name="text" id="tweet-text"></textarea>
+<div class="bottomLine">
+<button id="tweetBtn" type="submit">Tweet</button>
+<output name="counter" class="counter" for="tweet-text">140</output>
+</div>
+</form>
+<section id="tweets">
+
+</section>
+</section>
+</main> -->
