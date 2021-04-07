@@ -43,4 +43,19 @@ $(() => {
         console.log("oh no", err);
       });
   });
+
+  // $(".todo-info").on("click", (event) => {
+  //   const toDoId = $(".todo-info")
+  //   console.log("MY TODOid", toDoId)
+  //   $.ajax({
+  //     type: "GET",
+  //     url: `/todos/1`
+  //   })
+  //   .then((res) => {
+  //     console.log("success", res);
+  //   })
+  //   .catch((err) => {
+  //     console.log("oh no", err);
+  //   });
+  // })
 });

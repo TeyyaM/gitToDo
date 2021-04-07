@@ -25,13 +25,6 @@
   <%- include('partials/_header') %>
     <main class="first-main">
       <article id="specific-todo">
-        <header>
-          <%if (user_id && todo_id) {%>
-            <h2><%= category.name %></h2>
-            <h3><%= todo.name %></h3>
-        </header>
-        <label for="note">Note:</label>
-        <p><%= todo.note %></p>
         <!-- show note -->
         <!-- Add the deadline-->
         <form id="category-change" data-to-id="1">
