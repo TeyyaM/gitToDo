@@ -14,7 +14,7 @@ module.exports = (pool) => {
   router.get("/todos/categories", (req, res) => {
     const templateVars = {
       user_id: req.session.user_id,
-      index: true
+      index: false
     };
     res.render("todo_categories", templateVars);
   });
@@ -82,11 +82,43 @@ module.exports = (pool) => {
               res.redirect(`/api/todos/${data.rows[0].user_id}/${data.rows[0].id}`);
             })
             .catch(err => {
-              res
-                .status(500)
+              res.status(500)
                 .json({ error: err.message });
             });
         })
+    }
+  });
+
+  // Complete a todo
+  router.post("/todos/:todo_id/:column_name", (req, res) => {
+    const column_name = req.params.column_name
+    if (req.params.column_name === 'delete') {
+      const query = `DELETE
+      FROM todos
+      WHERE user_id = $1 AND id = $2`;
+      const queryParams = [req.session.user_id, req.params.todo_id];
+      pool.query(query, queryParams)
+        .then(() => {
+          res.redirect("/todos/categories");
+        })
+        .catch(err => {
+          res.status(500)
+            .json({ error: err.message });
+        });
+    }
+
+    if (req.params.column_name === 'complete') {
+
+      pool.query(`UPDATE todos
+        SET date_completed = NOW()
+        WHERE user_id = $1 AND id = $2 RETURNING date_completed;`, [req.session.user_id, req.params.todo_id])
+        .then((data) => {
+          res.redirect("/todos/categories");
+        })
+        .catch(err => {
+          res.status(500)
+            .json({ error: err.message });
+        });
     }
   });
 
