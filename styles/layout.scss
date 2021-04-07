@@ -1,7 +1,7 @@
 // See: https://sass-lang.com/
 
 body {
-  background-color: #EEE;
+  background-color: #eee;
 
   h1 {
     color: #244751;
@@ -13,9 +13,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position:fixed;
+  position: fixed;
   width: 100%;
-  top:0;
+  top: 0;
   background-color: rgb(255, 174, 76);
   height: 80px;
 }
@@ -33,9 +33,51 @@ body {
 .mars {
   display: flex;
   flex-direction: column;
-};
-
+}
 
 main.first-main {
   margin-top: 80px;
-};
+}
+.dropbtn {
+  background-color: #4caf50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+
+  button {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+}
+
+.dropdown-content button:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  width: 100%;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}

@@ -1,0 +1,52 @@
+<head>
+  <!-- Meta Information -->
+  <title>BucketListing - Home Page</title>
+
+  <!-- External CSS Placeholder-->
+  <!-- <link rel="stylesheet" href="the h ref" type="text/css"> -->
+
+  <!-- App CSS -->
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+
+  <!-- External JS -->
+  <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" data-auto-a11y="true"></script>
+
+  <!-- App JS -->
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+
+  <!-- For Mobile Sizing-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <%- include('partials/_header') %>
+    <main class="first-main">
+      <article id="specific-todo">
+        <header>
+          <%if (user_id && todo_id) {%>
+            <h2><%= category.name %></h2>
+            <h3><%= todo.name %></h3>
+        </header>
+        <label for="note">Note:</label>
+        <p><%= todo.note %></p>
+        <!-- show note -->
+        <!-- Add the deadline-->
+        <form id="category-change" data-to-id="1">
+          <label for="category">Choose category:</label>
+          <select name="category" id="category">
+            <option value="2">Eat</option>
+            <option value="3">Read</option>
+            <option value="4">Watch</option>
+            <option value="5">Buy</option>
+          </select>
+          <br><br>
+          <input type="submit" value="Submit">
+        </form>
+    </article>
+  </main>
+</body>
+
+</html>
