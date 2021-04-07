@@ -27,12 +27,37 @@ body {
   align-self: center;
   justify-self: center;
   flex-direction: column;
-  width: 100%;
+  width: 600px;
+  border: 15px solid green;
+  padding: 50px;
+  margin: auto;
+  a {
+    background-color: rgb(52, 52, 146);
+    color: white;
+    padding: 1em 1.5em;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 5px solid purple;
+
+  }
+  a:hover {
+    background-color: rgb(107, 107, 238);
+  }
+
+}
+
+.bruno {
+
+  display: flex;
+  border: 5px solid black;
+
 }
 
 .mars {
   display: flex;
   flex-direction: column;
+
+  border: 5px solid black;
 }
 
 main.first-main {

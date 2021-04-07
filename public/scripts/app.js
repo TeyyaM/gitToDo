@@ -37,7 +37,7 @@ $(() => {
       data: { dbIndex },
     })
       .then((res) => {
-        console.log("success", res);
+        location.href = `/todos/${toDoId}`;
       })
       .catch((err) => {
         console.log("oh no", err);
