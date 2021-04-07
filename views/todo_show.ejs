@@ -73,9 +73,11 @@
           <br><br>
           <input type="submit" value="Change Category">
         </form>
-        <form action="/todos/<%=todo_id%>/complete" method="POST">
-          <button type="submit">Complete!</button>
-        </form>
+        <%if (!todo.date_completed) {%>
+            <form action="/todos/<%=todo_id%>/complete" method="POST">
+              <button type="submit">Complete!</button>
+            </form>
+          <%}%>
         <form action="/todos/<%=todo_id%>/delete" method="POST">
           <button type="submit">Delete</button>
         </form>
