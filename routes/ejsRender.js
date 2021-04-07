@@ -56,39 +56,40 @@ module.exports = (pool) => {
   });
 
   // edit to do item
-  /*
-  UPDATE courses
-SET published_date = '2020-08-01'
-WHERE course_id = 3; */
-  router.post("/todos/:category_id/edit", (req, res) => {
-    // console.log("req.body.toDoId", req.body.toDoId);
-    const query = `UPDATE todos
-    SET category_id = $2
-    WHERE user_id = $1 AND id = $3`;
-    const queryParams = [req.session.user_id, req.params.category_id, req.body.toDoId];
-    pool.query(query, queryParams).then((data) => {
-      const templateVars = {
-        user_id: req.session.user_id,
-        index: false,
-        todos: data.rows[0],
-      };
-      res.render("todo_show", templateVars);
-    });
-  });
-
-  router.post("/todos/:todo_id/delete", (req, res) => {
-    const query = `DELETE
-    FROM todos
-    WHERE user_id = $1 AND id = $2`;
+  router.post("/todos/:todo_id/:column_name", (req, res) => {
+    // console.log(req);
+    // // Complete or Delete a todo
     const queryParams = [req.session.user_id, req.params.todo_id];
-    pool.query(query, queryParams).then((data) => {
-      const templateVars = {
-        user_id: req.session.user_id,
-        index: false,
-        todos: data.rows[0],
-      };
-      res.redirect("/todos/new", templateVars);
-    });
+    const column_name = req.params.column_name;
+    let queryString = '';
+    if (column_name === 'delete') {
+      queryString = `DELETE
+      FROM todos`;
+    }
+    if (column_name === 'complete') {
+      queryString = `UPDATE todos
+      SET date_completed = NOW()`;
+    }
+    // WET, DRY later!!
+    // needs button to POST /todos/:todo_id/category_id
+    if (column_name === 'category_id' || column_name === 'note' || column_name === 'name') {
+      const attribute = req.body.dbIndex //change later to get from submit
+      queryString = `UPDATE todos
+      SET ${column_name} = ${attribute}`;
+    }
+
+    queryString += ` WHERE user_id = $1 AND id = $2`;
+    // console.log(queryString)
+    // console.log(queryParams)
+    pool.query(queryString, queryParams)
+      .then(() => {
+        res.redirect("/todos/categories");
+      })
+      .catch(err => {
+        res.status(500)
+          .json({ error: err.message });
+      });
+
   });
 
   router.post("/todos/new", (req, res) => {

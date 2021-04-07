@@ -33,8 +33,8 @@ $(() => {
     // }
     $.ajax({
       type: "POST",
-      url: `/todos/${dbIndex}/edit`,
-      data: { toDoId },
+      url: `/todos/${toDoId}/category_id`,
+      data: { dbIndex },
     })
       .then((res) => {
         console.log("success", res);
