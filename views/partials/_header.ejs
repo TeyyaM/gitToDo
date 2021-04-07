@@ -10,7 +10,7 @@
       <div>
         <a href="/logout">Logout</a>
         <%if (user_id && index) {%>
-          <a href=<%=`/api/todos/${user_id}`%>>View Todos</a>
+          <a href=<%=`/todos/categories`%>>View Todos</a>
           <%} else {%>
             <a href="/">Add Todos</a>
             <%}%>
