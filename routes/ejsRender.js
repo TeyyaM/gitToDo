@@ -89,39 +89,31 @@ module.exports = (pool) => {
     }
   });
 
-  // Complete a todo
+  // // Complete or Delete a todo
+
   router.post("/todos/:todo_id/:column_name", (req, res) => {
-    const column_name = req.params.column_name
-    if (req.params.column_name === 'delete') {
-      const query = `DELETE
-      FROM todos
-      WHERE user_id = $1 AND id = $2`;
-      const queryParams = [req.session.user_id, req.params.todo_id];
-      pool.query(query, queryParams)
-        .then(() => {
-          res.redirect("/todos/categories");
-        })
-        .catch(err => {
-          res.status(500)
-            .json({ error: err.message });
-        });
+    const column_name = req.params.column_name;
+    let queryString = '';
+    if (column_name === 'delete') {
+      queryString = `DELETE
+      FROM todos`;
     }
-
-    if (req.params.column_name === 'complete') {
-
-      pool.query(`UPDATE todos
-        SET date_completed = NOW()
-        WHERE user_id = $1 AND id = $2 RETURNING date_completed;`, [req.session.user_id, req.params.todo_id])
-        .then((data) => {
-          res.redirect("/todos/categories");
-        })
-        .catch(err => {
-          res.status(500)
-            .json({ error: err.message });
-        });
+    if ((column_name === 'complete')) {
+      queryString = `UPDATE todos
+      SET date_completed = NOW()`;
     }
+    queryString += ` WHERE user_id = $1 AND id = $2`;
+    const queryParams = [req.session.user_id, req.params.todo_id];
+    pool.query(queryString, queryParams)
+      .then(() => {
+        res.redirect("/todos/categories");
+      })
+      .catch(err => {
+        res.status(500)
+          .json({ error: err.message });
+      });
+
   });
-
   return router;
 };
 
