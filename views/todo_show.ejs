@@ -24,28 +24,22 @@
 <body>
   <%- include('partials/_header') %>
     <main class="first-main">
-      <!-- <div class="dropdown">
-        <button class="dropbtn">Edit Category</button>
-        <div class="dropdown-content">
-          <button href="/todos/2/edit">Eat</button>
-          <button href="/todos/3/edit">Read</button>
-          <button href="/todos/4/edit">Watch</button>
-          <button href="/todos/5/edit">Buy</button>
-               </main>
-        </div> -->
-
-          <form id="category-change" data-to-id="1">
-            <label for="category">Choose category:</label>
-            <select name="category" id="category">
-              <option value="2">Eat</option>
-              <option value="3">Read</option>
-              <option value="4">Watch</option>
-              <option value="5">Buy</option>
-            </select>
-            <br><br>
-            <input type="submit" value="Submit">
-          </form>
-
+      <article id="specific-todo">
+        <header>
+          <%if (user_id && index) {%>
+        </header>
+        <form id="category-change" data-to-id="1">
+          <label for="category">Choose category:</label>
+          <select name="category" id="category">
+            <option value="2">Eat</option>
+            <option value="3">Read</option>
+            <option value="4">Watch</option>
+            <option value="5">Buy</option>
+          </select>
+          <br><br>
+          <input type="submit" value="Submit">
+        </form>
+    </article>
   </main>
 </body>
 
