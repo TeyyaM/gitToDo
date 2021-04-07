@@ -48,7 +48,17 @@ body {
   margin: auto;
   display: table;
   table-layout: fixed;
-
+  @media (max-width: 450px) {
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+  @media (min-width: 451px) and (max-width: 649px) {
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+  @media (min-width: 650px) {
+    font-size: 1.8em;
+  }
 
   a {
       display: inline-block;
