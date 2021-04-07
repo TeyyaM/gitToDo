@@ -60,11 +60,12 @@ module.exports = (pool) => {
   UPDATE courses
 SET published_date = '2020-08-01'
 WHERE course_id = 3; */
-  router.post("todos/:todo_id/edit", (req, res) => {
+  router.post("/todos/:category_id/edit", (req, res) => {
+    // console.log("req.body.toDoId", req.body.toDoId);
     const query = `UPDATE todos
-    SET category_id = $1
-    WHERE user_id = $1 AND id = $2;`;
-    const queryParams = [req.session.user_id, req.params.todo_id];
+    SET category_id = $2
+    WHERE user_id = $1 AND id = $3`;
+    const queryParams = [req.session.user_id, req.params.category_id, req.body.toDoId];
     pool.query(query, queryParams).then((data) => {
       const templateVars = {
         user_id: req.session.user_id,
