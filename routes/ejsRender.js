@@ -55,7 +55,16 @@ module.exports = (pool) => {
     });
   });
 
+  // edit to do item
+  /*
+  UPDATE courses
+SET published_date = '2020-08-01'
+WHERE course_id = 3; */
   router.post("todos/:todo_id/edit", (req, res) => {
+    const query = `UPDATE todos
+    SET category_id = $1
+    WHERE user_id = $1 AND id = $2;`;
+    const queryParams = [req.session.user_id, req.params.todo_id];
     pool.query(query, queryParams).then((data) => {
       const templateVars = {
         user_id: req.session.user_id,
@@ -63,6 +72,21 @@ module.exports = (pool) => {
         todos: data.rows[0],
       };
       res.render("todo_show", templateVars);
+    });
+  });
+
+  router.post("/todos/:todo_id/delete", (req, res) => {
+    const query = `DELETE
+    FROM todos
+    WHERE user_id = $1 AND id = $2`;
+    const queryParams = [req.session.user_id, req.params.todo_id];
+    pool.query(query, queryParams).then((data) => {
+      const templateVars = {
+        user_id: req.session.user_id,
+        index: false,
+        todos: data.rows[0],
+      };
+      res.redirect("/todos/new", templateVars);
     });
   });
 
