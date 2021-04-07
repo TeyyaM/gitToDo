@@ -11,6 +11,7 @@ module.exports = (pool) => {
     };
     res.render("index", templateVars);
   });
+
   router.get("/todos/categories", (req, res) => {
     const templateVars = {
       user_id: req.session.user_id,
