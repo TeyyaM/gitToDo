@@ -11,6 +11,7 @@ module.exports = (pool) => {
     };
     res.render("index", templateVars);
   });
+
   router.get("/todos/categories", (req, res) => {
     const templateVars = {
       user_id: req.session.user_id,
@@ -23,10 +24,10 @@ module.exports = (pool) => {
   router.get("/todos/categories/:category_id", (req, res) => {
     const category_id = req.params.category_id;
     const queryParams = [req.session.user_id];
-    let query = `SELECT todos.id, todos.name, deadline, categories.name as cat_name
+    let query = `SELECT todos.id, todos.name, deadline, categories.name as category_name
     FROM todos
     JOIN categories ON todos.category_id = categories.id
-    WHERE user_id = $1`;
+    WHERE user_id = $1 AND date_completed IS NULL`;
     if (category_id !== "all") {
       query += ` AND category_id = $2`;
       queryParams.push(category_id);

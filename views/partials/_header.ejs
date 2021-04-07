@@ -1,16 +1,13 @@
 <header class="nav-bar">
   <nav>
     <div>
-      <a href="/">BucketListing</a>
-      <%if (user_id) {%>
-        <span>Hey there, @username!</span>
-        <%}%>
+      <a id="logo" href="/">BucketListing</a>
     </div>
     <%if (user_id) {%>
       <div>
         <a href="/logout">Logout</a>
         <%if (user_id && index) {%>
-          <a href=<%=`/api/todos/${user_id}`%>>View Todos</a>
+          <a href=<%=`/todos/categories`%>>View Todos</a>
           <%} else {%>
             <a href="/">Add Todos</a>
             <%}%>
