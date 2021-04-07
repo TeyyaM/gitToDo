@@ -78,7 +78,7 @@ module.exports = (pool) => {
     // WET, DRY later!!
     // needs button to POST /todos/:todo_id/category_id
     if (column_name === 'category_id' || column_name === 'note' || column_name === 'name') {
-      const attribute = req.body.dbIndex //change later to get from submit
+      const attribute = req.body.dbIndex 
       queryString = `UPDATE todos
       SET ${column_name} = ${attribute}`;
     }
