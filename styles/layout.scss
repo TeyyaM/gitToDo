@@ -72,8 +72,6 @@ body {
       color: white;
       border-radius: 5px;
       box-shadow: 2px 2px 1px #888888;
-      clear:right;
-      // float:right;
       text-decoration: none;
       text-transform: uppercase;
       border: 5px solid rgb(247, 95, 14);
@@ -121,9 +119,68 @@ main.first-main {
   justify-content: center;
   flex-direction: column;
   text-align: center;
+
+  h1 {
+    margin-top: 0px;
+    position: sticky;
+    top: 80px;
+    background-color: #eaf0f5;
+  }
+  h3 {
+    color: #4394a7;
+    margin-top: 5px;
+    text-decoration: none;
+  }
+  h3:first-letter {
+    text-transform: capitalize;
+  }
+  h2 {
+    color: white;
+
+  }
+  h2:first-letter {
+    text-transform: capitalize;
+  }
 }
 
 .todo-info {
   text-align: center;
   background-color: rgb(255, 174, 76);
+  width: 80%;
+  margin-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  border: 2px solid black;
+  border-radius: 10px;
+  height: 100px;
+}
+
+.todo-info:hover  {
+  background-color: #e4750dda;
+}
+
+#specific-todo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 600px;
+  padding-top: 7%;
+  border-radius: 5px;
+  margin: auto;
+  box-shadow: 5px 5px 5px #888888;
+  // #mod-buttons {
+
+  // }
+  button:hover {
+    background-color: rgb(255, 174, 76);
+  }
+  .the-note {
+    opacity: 0.5;
+    font-size: 10px;
+    display: inline;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+
+  }
 }
