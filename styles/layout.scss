@@ -72,8 +72,6 @@ body {
       color: white;
       border-radius: 5px;
       box-shadow: 2px 2px 1px #888888;
-      clear:right;
-      float:right;
       text-decoration: none;
       text-transform: uppercase;
       border: 5px solid rgb(247, 95, 14);
@@ -102,4 +100,29 @@ main.first-main {
 .todo-info {
   text-align: center;
   background-color: rgb(255, 174, 76);
+}
+
+#specific-todo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 600px;
+  padding-top: 7%;
+  border-radius: 5px;
+  margin: auto;
+  box-shadow: 5px 5px 5px #888888;
+  #mod-buttons {
+
+  }
+  button:hover {
+    background-color: rgb(255, 174, 76);
+  }
+  .the-note {
+    opacity: 0.5;
+    font-size: 10px;
+    display: inline;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+
+  }
 }
