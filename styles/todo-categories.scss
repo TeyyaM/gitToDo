@@ -1,0 +1,44 @@
+.categories-container {
+  width: 80%;
+  padding-top: 5%;
+  border-radius: 5px;
+  margin: auto;
+  display: table;
+  table-layout: fixed;
+  max-width: 600px;
+  font-size: 1.8em;
+
+  @media (max-width: 450px) {
+    margin-top: 30px;
+    padding-left: 3px;
+    padding-right: 3px;
+    font-size: 1.5em;
+  }
+  @media (min-width: 451px) and (max-width: 649px) {
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+
+
+  a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: 1em 0.6em;
+    background: $main-bold;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 2px 2px 1px #888888;
+    text-transform: uppercase;
+    border: 5px solid $main-bold;
+    text-align: center;
+    font-weight: bold;
+
+   }
+
+   a:hover {
+    background-color: lighten(saturate($main-bold, 20%), 20%);
+    transition: 0.3s;
+  }
+
+}
