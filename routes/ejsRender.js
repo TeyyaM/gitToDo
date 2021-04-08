@@ -79,7 +79,7 @@ module.exports = (pool) => {
     // WET, DRY later!!
     // needs button to POST /todos/:todo_id/category_id
     if (column_name === 'category_id' || column_name === 'note' || column_name === 'name') {
-      const attribute = req.body.dbIndex 
+      const attribute = req.body.dbIndex
       queryString = `UPDATE todos
       SET ${column_name} = ${attribute}`;
     }
@@ -130,3 +130,4 @@ module.exports = (pool) => {
 
   return router;
 };
+console.log("HEY");
