@@ -1,0 +1,52 @@
+
+#create-todo {
+  // position: fixed;
+  // display: flex;
+  // flex-direction: column;
+  // align-content: space-between;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
+  margin-top: 10px;
+  max-width: 600px;
+  max-height: 600px;
+  border: 5px solid $main-light;
+  border-radius: 10px;
+  padding: 65px;
+  font-size: 1em;
+
+  @media (max-width: 450px) {
+    border: none;
+    border: 5px solid #04cdb9;
+    margin: 10px;
+    padding: 1em 1em 2em 1em;
+  }
+
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    h3, label, input {
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      margin-top: 0;
+      text-align: center;
+      color:rgb(94, 86, 86);
+      font-size: 1.3em;
+      font-weight: bold;
+    }
+    button {
+      background: $main-bold;
+      color: $light-text;
+      border-radius: 4px;
+      padding: 0.3em;
+      border: none;
+    }
+    button:hover{
+      background: $main-light;
+      transition:.3s background ease;
+    }
+  }
+}
