@@ -16,12 +16,12 @@ module.exports = (pool) => {
         };
         res.render("index", templateVars);
       })
-  });
+    });
 
-  router.get("/todos/categories", (req, res) => {
-    const templateVars = {
+    router.get("/todos/categories", (req, res) => {
+      const templateVars = {
       user_id: req.session.user_id,
-      index: true,
+      index: false
     };
     res.render("todo_categories", templateVars);
   });

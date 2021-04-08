@@ -29,18 +29,18 @@
     <main class="first-main">
       <section id="todo-list">
 
-          <h1>Your To-Do list</h1>
+          <h1>Your To-Do List</h1>
 
         <div class="category-todo-container">
           <%for (const todo of todos) {%>
-            <div class="todo-info">
+            <div class="todo-info" id="<%=todo.category_name%>">
             <a href="/todos/<%=todo.id%>" >
-              <h3>
+              <span class="category-name">
                 <%=todo.category_name%>
-              </h3>
-              <h2>
+              </span>
+              <span>
                 <%=todo.name%>
-              </h2>
+              </span>
             </a>
             </div>
             <%}%>

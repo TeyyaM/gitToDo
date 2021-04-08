@@ -1,8 +1,22 @@
-$orange: rgb(247, 95, 14);
-$lighten-org: rgb(255, 174, 76);
+$main-bold: rgb(18, 47, 206);
+$main-light: rgb(4, 205, 185);
+$read: rgb(51, 189, 4);
+$read-light: lighten(desaturate($read, 5%), 6%);
+$eat: rgb(230, 31, 24);
+$eat-light: lighten(saturate($eat, 100%), 10%);
+// $eat-light: lighten($eat, 9%);
+$buy: rgb(219, 47, 199);
+$buy-light: lighten(saturate($buy, 100%), 20%);
+$watch: rgb(93, 31, 140);
+$watch-light: lighten($watch, 20%);
+$misc: rgb(255, 107, 0);
+$misc-light: lighten(saturate($misc, 100%), 10%);
+$light-text: #fff;
 
 body {
-  background-color: #fff;
+  background-color: rgba(255, 225, 193, 0.289);
+  // background-image: url("https://www.transparenttextures.com/patterns/notebook-dark.png"); // Dirty paper look
+  background-image: url("https://www.transparenttextures.com/patterns/lined-paper-2.png");
 
   h1 {
     color: #244751;
@@ -10,9 +24,16 @@ body {
 }
 // placeholders, add variables later
 .nav-bar nav {
+  z-index: 1;
+  background-image: url("https://www.transparenttextures.com/patterns/food.png");
+  // background-image: url("https://www.transparenttextures.com/patterns/lined-paper-2.png");
+
   #logo {
     font-style: italic;
     font-style: bold;
+    @media (min-width: 450px) {
+      font-size: 1.8em;
+    }
   }
   display: flex;
   justify-content: space-between;
@@ -20,12 +41,13 @@ body {
   position: fixed;
   width: 100%;
   top: 0;
-  background-color: $lighten-org;
-  height: 81px;
+  background-color: $main-light;
+  height: 100px;
   padding: 10px;
   a {
+    border-radius: 7px;
     text-decoration: none;
-    background-color: $orange;
+    background-color: $main-bold;
     color: rgb(255, 255, 255);
     padding: 20px;
     @media (max-width: 450px) {
@@ -43,48 +65,53 @@ body {
 }
 
 .categories-container {
-  width: 600px;
-  padding-top: 10%;
+  width: 80%;
+  padding-top: 5%;
   border-radius: 5px;
   margin: auto;
   display: table;
   table-layout: fixed;
+  max-width: 600px;
+  font-size: 1.8em;
+
   @media (max-width: 450px) {
+    margin-top: 30px;
     padding-left: 3px;
     padding-right: 3px;
+    font-size: 1.5em;
   }
   @media (min-width: 451px) and (max-width: 649px) {
     padding-left: 7px;
     padding-right: 7px;
   }
-  @media (min-width: 650px) {
-    font-size: 1.8em;
-  }
+
 
   a {
     display: inline-block;
     width: 100%;
     height: 100%;
     padding: 1em 0.6em;
-    background: $orange;
+    background: $main-bold;
     color: white;
     border-radius: 5px;
     box-shadow: 2px 2px 1px #888888;
     text-transform: uppercase;
-    border: 5px solid $orange;
+    border: 5px solid $main-bold;
     text-align: center;
     font-weight: bold;
 
    }
 
    a:hover {
-    background-color: rgba(247, 95, 14, 0.5);
+    background-color: $main-light;
+    transition: 0.3s;
   }
 
 }
 
 a {
   text-decoration: none;
+  color: $light-text;
 }
 
 main {
@@ -99,14 +126,22 @@ main {
   // display: flex;
   // flex-direction: column;
   // align-content: space-between;
-  // margin-top: 300px;
   // left: 50%;
   // transform: translate(-50%, -50%);
-  max-width: 400px;
-  max-height: 400px;
-  background-color: $lighten-org;
-  padding: 85px;
+  margin-top: 10px;
+  max-width: 600px;
+  max-height: 600px;
+  border: 5px solid $main-light;
+  border-radius: 10px;
+  padding: 65px;
   font-size: 1em;
+
+  @media (max-width: 450px) {
+    border: none;
+    border: 5px solid #04cdb9;
+    margin: 10px;
+    padding: 1em 1em 2em 1em;
+  }
 
   form {
     width: 100%;
@@ -124,7 +159,17 @@ main {
       font-size: 1.3em;
       font-weight: bold;
     }
-
+    button {
+      background: $main-bold;
+      color: $light-text;
+      border-radius: 4px;
+      padding: 0.3em;
+      border: none;
+    }
+    button:hover{
+      background: $main-light;
+      transition:.3s background ease;
+    }
   }
 }
 
@@ -137,45 +182,110 @@ main.first-main {
   justify-content: center;
   flex-direction: column;
   text-align: center;
-
+  // padding: 85px;
   h1 {
-    margin-top: 0px;
+    margin-top: 30px;
+    margin-bottom: 30px;
     position: sticky;
-    top: 80px;
-    background-color: #eaf0f5;
-  }
-  h3 {
-    color: #4394a7;
-    margin-top: 5px;
-    text-decoration: none;
-  }
-  h3:first-letter {
-    text-transform: capitalize;
-  }
-  h2 {
-    color: white;
 
   }
-  h2:first-letter {
-    text-transform: capitalize;
-  }
+
 }
-
+#watch {
+  background-color: $watch;
+  border-color: $watch;
+  border-radius: 5px;
+  color: $light-text;
+}
+#watch:hover {
+  background-color: $watch-light;
+}
+#eat {
+  background-color: $eat;
+  border-radius: 5px;
+  border-color: $eat;
+  color: $light-text;
+}
+#eat:hover {
+  background-color: $eat-light;
+}
+#read {
+  background-color: $read;
+  border-color: $read;
+  border-radius: 5px;
+  color: $light-text;
+}
+#read:hover {
+  background-color: $read-light;
+}
+#buy {
+  background-color: $buy;
+  border-color: $buy;
+  border-radius: 5px;
+  color: $light-text;
+}
+#buy:hover {
+  background-color: $buy-light;
+}
+#miscellaneous {
+  background-color: $misc;
+  border-color: $misc;
+  border-radius: 5px;
+  color: $light-text;
+}
+#miscellaneous:hover {
+  background-color: $misc-light;
+}
 .todo-info {
   text-align: center;
-  background-color: $orange;
-  width: 80%;
+  background-color: $main-bold;
+  width: 100%;
   margin-bottom: 5px;
   margin-left: auto;
   margin-right: auto;
   margin-top: auto;
   border: 2px solid black;
   border-radius: 10px;
-  height: 100px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  span {
+    color: $light-text;
+    margin-top: 5px;
+    text-decoration: none;
+    display: flex;
+    justify-self: space-around;
+    flex-direction: column;
+    font-size: 45px;
+    text-transform: capitalize;
+    @media (max-width: 500px) {
+      font-size: 30px;
+
+    }
+  }
+  span.category-name {
+    font-size: 25px;
+    @media (max-width: 500px) {
+      font-size: 20px;
+
+    }
+
+  }
+
+  @media (max-width: 450px) {
+    width: 400px;
+    font-size:3vw;
+  }
+  @media (min-width: 650px) {
+    width: 600px;
+
+  }
 }
 
 .todo-info:hover  {
-  background-color: #e4750dda;
+  background-color: $main-light;
 }
 
 #specific-todo {
@@ -184,21 +294,63 @@ main.first-main {
   justify-content: center;
   width: 600px;
   padding-top: 7%;
-  border-radius: 5px;
   margin: auto;
-  box-shadow: 5px 5px 5px #888888;
-  // #mod-buttons {
+  box-shadow: 1px 1px 0.5px #888888;
+  text-align: center;
+  border-radius: 7px;
+  // background-image: url("https://www.transparenttextures.com/patterns/foggy-birds.png");
 
-  // }
-  button:hover {
-    background-color: $orange;
+  .specifi-todo-name {
+    font-size: 30px;
   }
+
   .the-note {
     opacity: 0.5;
-    font-size: 10px;
+    // font-size: 15px;
+  }
+
+  .created-on {
+    opacity: 0.5;
+    font-size: 15px;
     display: inline;
     margin-block-start: 1em;
     margin-block-end: 1em;
 
+  }
+
+  h2 {
+    color: rgb(255, 255, 255);
+    padding: .5em;
+    // background-color: $read;
+  }
+
+  h3 {
+    text-transform: capitalize;
+  }
+  // h2.watch {
+  //   background-color: $watch;
+  // }
+  // h2.eat {
+  //   background-color: $eat;
+  // }
+  // h2.read {
+  //   background-color: $read;
+  // }
+  // h2.buy {
+  //   background-color: $buy;
+  // }
+
+  .send-btn{
+    border: 0;
+    // background:#343050;
+    padding:.5rem;
+    color:white;
+    width:auto;
+    // text-transform:uppercase;
+    cursor:pointer;
+    transition:.3s background ease;
+    // &:hover{
+    //   background:#3498DB;
+    // }
   }
 }

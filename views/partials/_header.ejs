@@ -1,15 +1,15 @@
 <header class="nav-bar">
   <nav>
     <div>
-      <a id="logo" href="/">BucketListing</a>
+      <a id="logo" href="/"><strong>Bucket</strong>Listing</a>
     </div>
     <%if (user_id) {%>
       <div>
         <a href="/logout">Logout</a>
         <%if (user_id && index) {%>
-          <a href=<%=`/todos/categories`%>>View Todos</a>
+          <a href=<%=`/todos/categories`%>>View ToDos</a>
           <%} else {%>
-            <a href="/">Add Todos</a>
+            <a href="/">Add ToDos</a>
             <%}%>
       </div>
       <%}%>

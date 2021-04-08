@@ -25,19 +25,21 @@
   <%- include('partials/_header') %>
     <main class="first-main">
         <article id="specific-todo" class="mars">
-          <header>
           <%if (user_id && todo_id) {%>
-            <h2>
-              <%= todo.category.toUpperCase() %>
+            <header>
+            <h2 id="<%=todo.category%>">
+              <a href="/todos/categories/all">
+                <%= todo.category.toUpperCase() %>
+              </a>
             </h2>
-            <h3>
+            <h3 class="specifi-todo-name">
               <%= todo.name %>
             </h3>
             <%}%>
           </header>
         <!--  Add details later for different categories  -->
         <%if (todo.note) {%>
-          <label for="note">Note:</label>
+          <label class="the-note" for="note">Note:</label>
           <p>
             <%= todo.note %>
           </p>
@@ -49,7 +51,7 @@
         </p>
         <%}%>
         <%if (todo.date_added) {%>
-        <div class="the-note">
+        <div class="created-on">
           <label for="note">Created on: <%= todo.date_added.toDateString()%></label>
         </div>
         <%}%>
@@ -61,27 +63,29 @@
         <%}%>
           <!-- show note -->
           <!-- Add the deadline-->
-          <span id="mod-buttons">
+
             <form id="category-change" data-to-id="<%=todo_id%>">
-              <label for="category">Change category:</label>
+              <label for="category">Change Category:</label>
               <select name="category" id="category">
+                <option > --- </option>
+                <option value="1">Misc</option>
                 <option value="2">Eat</option>
                 <option value="3">Read</option>
                 <option value="4">Watch</option>
                 <option value="5">Buy</option>
               </select>
               <br><br>
-              <input type="submit" value="Change Category">
+              <input id="<%=todo.category%>" class="send-btn" type="submit" value="Change Category">
             </form>
             <%if (!todo.date_completed) {%>
                 <form action="/todos/<%=todo_id%>/complete" method="POST">
-                  <button type="submit">Complete!</button>
+                  <button id="<%=todo.category%>" class="send-btn" type="submit">Complete!</button>
                 </form>
               <%}%>
             <form action="/todos/<%=todo_id%>/delete" method="POST">
-              <button type="submit">Delete</button>
+              <button id="<%=todo.category%>" class="send-btn" type="submit">Delete</button>
             </form>
-        </span>
+
       </article>
     </main>
 </body>
