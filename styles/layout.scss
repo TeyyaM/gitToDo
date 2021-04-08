@@ -95,6 +95,7 @@ main.first-main {
   justify-content: center;
   flex-direction: column;
   text-align: center;
+
   h1 {
     margin-top: 0px;
     position: sticky;
@@ -104,9 +105,17 @@ main.first-main {
   h3 {
     color: #4394a7;
     margin-top: 5px;
+    text-decoration: none;
+  }
+  h3:first-letter {
+    text-transform: capitalize;
   }
   h2 {
     color: white;
+
+  }
+  h2:first-letter {
+    text-transform: capitalize;
   }
 }
 
