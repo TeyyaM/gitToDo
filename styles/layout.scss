@@ -1,17 +1,4 @@
-$main-bold: rgb(18, 47, 206);
-$main-light: rgb(4, 205, 185);
-$read: rgb(51, 189, 4);
-$read-light: lighten(desaturate($read, 5%), 6%);
-$eat: rgb(230, 31, 24);
-$eat-light: lighten(saturate($eat, 100%), 10%);
-// $eat-light: lighten($eat, 9%);
-$buy: rgb(219, 47, 199);
-$buy-light: lighten(saturate($buy, 100%), 20%);
-$watch: rgb(93, 31, 140);
-$watch-light: lighten($watch, 20%);
-$misc: rgb(255, 107, 0);
-$misc-light: lighten(saturate($misc, 100%), 10%);
-$light-text: #fff;
+@import "var";
 
 body {
   background-color: rgba(255, 225, 193, 0.289);
@@ -35,6 +22,7 @@ body {
       font-size: 1.8em;
     }
   }
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -44,6 +32,7 @@ body {
   background-color: $main-light;
   height: 100px;
   padding: 10px;
+
   a {
     border-radius: 7px;
     text-decoration: none;

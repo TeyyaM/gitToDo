@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const { newTodoQuery } = require("../public/scripts/helpers");
+const generateTodoHelpers = require("../db/helpers/todohelpers");
 
 module.exports = (pool) => {
+  const { fetchTodoByCategory } = generateTodoHelpers(pool);
   // Home page
   router.get("/", (req, res) => {
     const user_id = req.session.user_id;
@@ -29,16 +31,17 @@ module.exports = (pool) => {
   // category 1, 2, 3 etc...
   router.get("/todos/categories/:category_id", (req, res) => {
     const category_id = req.params.category_id;
-    const queryParams = [req.session.user_id];
-    let query = `SELECT todos.id, todos.name, deadline, categories.name as category_name
-    FROM todos
-    JOIN categories ON todos.category_id = categories.id
-    WHERE user_id = $1 AND date_completed IS NULL`;
-    if (category_id !== "all") {
-      query += ` AND category_id = $2`;
-      queryParams.push(category_id);
-    }
-    pool.query(query, queryParams).then((data) => {
+    // const queryParams = [req.session.user_id];
+    // let query = `SELECT todos.id, todos.name, deadline, categories.name as category_name
+    // FROM todos
+    // JOIN categories ON todos.category_id = categories.id
+    // WHERE user_id = $1 AND date_completed IS NULL`;
+    // if (category_id !== "all") {
+    //   query += ` AND category_id = $2`;
+    //   queryParams.push(category_id);
+    // }
+    // pool.query(query, queryParams)
+    fetchTodoByCategory(category_id, req.session.user_id).then((data) => {
       const templateVars = {
         user_id: req.session.user_id,
         index: false,
