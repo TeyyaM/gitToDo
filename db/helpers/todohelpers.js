@@ -1,4 +1,5 @@
 const generateTodoHelpers = (pool) => {
+
   const fetchTodoByCategory = (categoryId, userId) => {
     const queryParams = [userId];
     let query = `SELECT todos.id, todos.name, deadline, categories.name as category_name
@@ -11,7 +12,21 @@ const generateTodoHelpers = (pool) => {
     }
     return pool.query(query, queryParams);
   };
-  return { fetchTodoByCategory };
+
+  const fetchTodoByTodoId = (todoId, userId) => {
+    const query = `SELECT todos.name, todos.deadline, todos.date_added,
+    todos.date_completed, todos.note, categories.name as category
+    FROM todos
+    JOIN categories ON categories.id = todos.category_id
+    WHERE todos.user_id = $1 AND todos.id = $2;`;
+    const queryParams = [userId, todoId];
+    return pool.query(query, queryParams);
+  };
+
+  return {
+    fetchTodoByCategory,
+    fetchTodoByTodoId
+  };
 };
 
 module.exports = generateTodoHelpers;
