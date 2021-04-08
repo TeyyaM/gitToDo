@@ -18,6 +18,11 @@
     padding: 1em 1em 2em 1em;
   }
 
+  p {
+    background: $err;
+    border-radius: 3px;
+  }
+
   form {
     width: 100%;
     display: flex;
