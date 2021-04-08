@@ -23,9 +23,29 @@ const generateTodoHelpers = (pool) => {
     return pool.query(query, queryParams);
   };
 
+  const updateTodoTable = (userId, todoId, columnName, attribute) => {
+    let queryParams = [userId, todoId];
+    let queryString = '';
+    if (columnName === 'delete') {
+      queryString = `DELETE
+      FROM todos`;
+    } else if (columnName === 'complete') {
+      queryString = `UPDATE todos
+      SET date_completed = NOW()`;
+    } else {
+      // could work for category_id, note, name, or deadline with front-end functionality
+      queryString = `UPDATE todos
+      SET ${columnName} = ${attribute}`;
+    }
+
+    queryString += ` WHERE user_id = $1 AND id = $2`;
+    return pool.query(queryString, queryParams);
+  };
+
   return {
     fetchTodoByCategory,
-    fetchTodoByTodoId
+    fetchTodoByTodoId,
+    updateTodoTable
   };
 };
 
