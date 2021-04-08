@@ -8,16 +8,20 @@ module.exports = (pool) => {
     fetchTodoByCategory,
     fetchTodoByTodoId,
     updateTodoTable } = generateTodoHelpers(pool);
-    
+
   // Home page
   router.get("/", (req, res) => {
     const user_id = req.session.user_id;
     pool.query(`SELECT name FROM users
     WHERE id = $1`, [user_id])
       .then((data) => {
+        let username = '';
+        if (data.rows[0]) {
+          username = data.rows[0].name;
+        }
         const templateVars = {
           user_id,
-          username: data.rows[0].name,
+          username,
           index: true,
         };
         res.render("index", templateVars);
@@ -91,8 +95,7 @@ module.exports = (pool) => {
       console.log("Empty Todo!");
     } else {
       newTodoQuery(inputObj).then((returnObj) => {
-        pool
-          .query(returnObj.str, returnObj.arr)
+        pool.query(returnObj.str, returnObj.arr)
           .then((data) => {
             // get user_id and the todo's id from data RETURNING data
             res.redirect(

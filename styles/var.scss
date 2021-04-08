@@ -11,4 +11,4 @@ $watch: rgb(93, 31, 140);
 $watch-light: lighten($watch, 20%);
 $misc: rgb(228, 101, 10);
 $misc-light: lighten(saturate($misc, 100%), 10%);
-$light-text: #fff;
+$light-text: rgb(255, 255, 255);
