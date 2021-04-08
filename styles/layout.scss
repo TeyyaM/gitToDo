@@ -19,7 +19,7 @@ body {
   position: fixed;
   width: 100%;
   top: 0;
-  background-color: rgb(255, 174, 76);
+  background-color: #ffae4c;
   height: 81px;
   padding: 10px;
   a {
@@ -73,7 +73,7 @@ body {
       border-radius: 5px;
       box-shadow: 2px 2px 1px #888888;
       clear:right;
-      float:right;
+      // float:right;
       text-decoration: none;
       text-transform: uppercase;
       border: 5px solid rgb(247, 95, 14);
@@ -86,6 +86,30 @@ body {
     background-color: rgb(255, 174, 76);
   }
 
+}
+
+#create-todo {
+  position: fixed;
+  max-width: 400px;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-items: space-around;
+  align-content: space-between;
+  margin-top: 300px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffae4c;
+  padding: 85px;
+  font-size: 1em;
+
+  h3 {
+    margin-top: 0;
+  }
+  form {
+    width: 100%;
+    flex-direction: column;
+  }
 }
 
 main.first-main {

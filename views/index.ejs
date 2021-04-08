@@ -26,20 +26,22 @@
 
 <body>
   <%- include('./partials/_header') %>
-
-    <main class="first-main">
-      <h3>What do you want todo?</h3>
-      <form id="new-todo" action="/todos/new" method="POST">
-        <div>
-          <label for="todo">Goal:</label>
-          <input type="text" id="todo-name" name="todo" placeholder="Key-words only :D">
-          <label for="note">Notes (optional):</label>
-          <input type="text" name="note" placeholder="Got details?">
-          <button type="submit">List it!</button>
-        </div>
-      </form>
-
-    </main>
+    <main>
+      <article id="create-todo">
+        <form id="new-todo" action="/todos/new" method="POST">
+          <h3>What do you want todo,  <%=username%>?</h3>
+            <div>
+              <label for="todo">Goal:</label>
+              <input type="text" id="todo-name" name="todo" placeholder="Name only, please!">
+            </div>
+            <div>
+              <label for="note">Notes (optional):</label>
+              <input type="text" name="note" placeholder="Got details?">
+            </div>
+            <button type="submit">List it!</button>
+          </form>
+      </article>
+      </main>
 
 </body>
 

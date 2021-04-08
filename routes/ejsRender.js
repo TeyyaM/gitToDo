@@ -5,11 +5,17 @@ const { newTodoQuery } = require("../public/scripts/helpers");
 module.exports = (pool) => {
   // Home page
   router.get("/", (req, res) => {
-    const templateVars = {
-      user_id: req.session.user_id,
-      index: true,
-    };
-    res.render("index", templateVars);
+    const user_id = req.session.user_id;
+    pool.query(`SELECT name FROM users
+    WHERE id = $1`, [user_id])
+      .then((data) => {
+        const templateVars = {
+          user_id,
+          username: data.rows[0].name,
+          index: true,
+        };
+        res.render("index", templateVars);
+      })
   });
 
   router.get("/todos/categories", (req, res) => {
@@ -79,7 +85,7 @@ module.exports = (pool) => {
     // WET, DRY later!!
     // needs button to POST /todos/:todo_id/category_id
     if (column_name === 'category_id' || column_name === 'note' || column_name === 'name') {
-      const attribute = req.body.dbIndex 
+      const attribute = req.body.dbIndex
       queryString = `UPDATE todos
       SET ${column_name} = ${attribute}`;
     }
