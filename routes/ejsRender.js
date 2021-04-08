@@ -6,7 +6,9 @@ const generateTodoHelpers = require("../db/helpers/todohelpers");
 module.exports = (pool) => {
   const {
     fetchTodoByCategory,
-    fetchTodoByTodoId } = generateTodoHelpers(pool);
+    fetchTodoByTodoId,
+    updateTodoTable } = generateTodoHelpers(pool);
+    
   // Home page
   router.get("/", (req, res) => {
     const user_id = req.session.user_id;
@@ -59,26 +61,11 @@ module.exports = (pool) => {
 
   // edit to do item
   router.post("/todos/:todo_id/:column_name", (req, res) => {
-    // console.log(req);
-    // // Complete or Delete a todo
-    const queryParams = [req.session.user_id, req.params.todo_id];
-    const column_name = req.params.column_name;
-    let queryString = '';
-    if (column_name === 'delete') {
-      queryString = `DELETE
-      FROM todos`;
-    } else if (column_name === 'complete') {
-      queryString = `UPDATE todos
-      SET date_completed = NOW()`;
-    } else {
-      // could work for category_id, note, name, or deadline with front-end funtionality
-      const attribute = req.body.dbIndex
-      queryString = `UPDATE todos
-      SET ${column_name} = ${attribute}`;
-    }
-
-    queryString += ` WHERE user_id = $1 AND id = $2`;
-    pool.query(queryString, queryParams)
+    const userId = req.session.user_id;
+    const todoId = req.params.todo_id;
+    const columnName = req.params.column_name;
+    const attribute = req.body.dbIndex
+    updateTodoTable(userId, todoId, columnName, attribute)
       .then(() => {
         res.redirect("/todos/categories");
       })
