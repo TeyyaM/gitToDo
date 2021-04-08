@@ -2,18 +2,16 @@
 
 body {
   background-color: rgba(255, 225, 193, 0.289);
-  // background-image: url("https://www.transparenttextures.com/patterns/notebook-dark.png"); // Dirty paper look
   background-image: url("https://www.transparenttextures.com/patterns/lined-paper-2.png");
 
   h1 {
     color: #244751;
   }
 }
-// placeholders, add variables later
+
 .nav-bar nav {
   z-index: 1;
   background-image: url("https://www.transparenttextures.com/patterns/food.png");
-  // background-image: url("https://www.transparenttextures.com/patterns/lined-paper-2.png");
 
   #logo {
     font-style: italic;
@@ -32,6 +30,7 @@ body {
   background-color: $main-light;
   height: 100px;
   padding: 10px;
+
 
   a {
     border-radius: 7px;
@@ -111,19 +110,17 @@ main {
 }
 
 #create-todo {
-  // position: fixed;
-  // display: flex;
-  // flex-direction: column;
-  // align-content: space-between;
-  // left: 50%;
-  // transform: translate(-50%, -50%);
-  margin-top: 10px;
   max-width: 600px;
   max-height: 600px;
   border: 5px solid $main-light;
   border-radius: 10px;
   padding: 65px;
   font-size: 1em;
+  // padding: 0;
+  margin: 1em auto 0;
+  box-shadow: 0px 0px 30px -5px #888888;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.3);
 
   @media (max-width: 450px) {
     border: none;
@@ -144,7 +141,7 @@ main {
     h3 {
       margin-top: 0;
       text-align: center;
-      color:rgb(94, 86, 86);
+      color:rgb(37, 34, 34);
       font-size: 1.3em;
       font-weight: bold;
     }
