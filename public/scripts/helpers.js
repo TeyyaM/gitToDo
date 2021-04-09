@@ -6,9 +6,8 @@ const {
 const stringSimilarity = require("string-similarity");
 
 async function findCategory(input) {
-
   const threshold = 0.8;
-  const string = input.toLowerCase();
+  const string = input.toString().toLowerCase();
 
   const categories = {
     eat: {
@@ -34,6 +33,7 @@ async function findCategory(input) {
   for (const key in categories) {
     const keyObj = categories[key]
     keyObj.name = await keyObj.apiFunc(string);
+    console.log("keyObj.name: ", keyObj.name);
     keyObj.similarity = stringSimilarity.compareTwoStrings(string, keyObj.name.toLowerCase());
     if (keyObj.similarity === 1) {
       return { category: keyObj.num, name: keyObj.name };

@@ -9,7 +9,7 @@
   text-align: center;
   border-radius: 7px;
   background-color: rgba(255, 255, 255, 0.3);
-  // background-image: url("https://www.transparenttextures.com/patterns/foggy-birds.png");
+  margin-top: 4em;
 
   .specifi-todo-name {
     font-size: 30px;
@@ -17,7 +17,6 @@
 
   .the-note {
     opacity: 0.5;
-    // font-size: 15px;
   }
 
   .created-on {
@@ -32,35 +31,18 @@
   h2 {
     color: rgb(255, 255, 255);
     padding: .5em;
-    // background-color: $read;
   }
 
   h3 {
     text-transform: capitalize;
   }
-  // h2.watch {
-  //   background-color: $watch;
-  // }
-  // h2.eat {
-  //   background-color: $eat;
-  // }
-  // h2.read {
-  //   background-color: $read;
-  // }
-  // h2.buy {
-  //   background-color: $buy;
-  // }
 
   .send-btn{
     border: 0;
     padding:.5rem;
     color:white;
     width:auto;
-    // text-transform:uppercase;
     cursor:pointer;
     transition:.3s background ease;
-    // &:hover{
-    //   background:#3498DB;
-    // }
   }
 }
