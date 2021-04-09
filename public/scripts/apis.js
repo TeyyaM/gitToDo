@@ -12,19 +12,24 @@ const shopKey = process.env.shop_key;
 
 
 const checkYelp = (string) => {
+  fetch('https://api.ipify.org?format=json')
+    .then(res => res.json())
+    .then(json => fetch(`https://freegeoip.app/json/${json.ip}`))
+    .then(res => res.json())
+    .then(location => {
+      const searchRequest = {
+        term: string,
+        latitude: location.latitude,
+        longitude: location.longitude
+      };
+      const client = yelp.client(yelpKey);
 
-  const searchRequest = {
-    term: string,
-    location: 'vancouver' // Can change to be based on user location later
-  };
-
-  const client = yelp.client(yelpKey);
-
-  return client.search(searchRequest).then(response => {
-    const firstResult = response.jsonBody.businesses[0];
-    const prettyJson = JSON.stringify(firstResult, null, 4);
-    return JSON.parse(prettyJson).name;
-  })
+      return client.search(searchRequest).then(response => {
+        const firstResult = response.jsonBody.businesses[0];
+        const prettyJson = JSON.stringify(firstResult, null, 4);
+        return JSON.parse(prettyJson).name;
+      })
+    })
     .catch(() => {
       return 'yelp api error';
     });
