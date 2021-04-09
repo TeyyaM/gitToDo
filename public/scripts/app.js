@@ -13,24 +13,10 @@ $(() => {
     }
   });
 
-  /* Sarah Nicholsonvar
-7:17 PMSarah Nicholson$('#form').serializeArray() */
-
   $("#category-change").on("submit", (event) => {
     event.preventDefault();
     const dbIndex = $("#category").val();
     const toDoId = $("#category-change").attr("data-to-id");
-    // console.log(toDoId);
-
-    // if (data === "Eat") {
-    //   dbIndex = 2;
-    // } else if (data === "Read") {
-    //   dbIndex = 3;
-    // } else if (data === "Watch") {
-    //   dbIndex = 4;
-    // } else if (data === "Buy") {
-    //   dbIndex = 5;
-    // }
     $.ajax({
       type: "POST",
       url: `/todos/${toDoId}/category_id`,
