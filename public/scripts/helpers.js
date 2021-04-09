@@ -33,7 +33,6 @@ async function findCategory(input) {
   for (const key in categories) {
     const keyObj = categories[key]
     keyObj.name = await keyObj.apiFunc(string);
-    console.log("keyObj.name: ", keyObj.name);
     keyObj.similarity = stringSimilarity.compareTwoStrings(string, keyObj.name.toLowerCase());
     if (keyObj.similarity === 1) {
       return { category: keyObj.num, name: keyObj.name };

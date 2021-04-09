@@ -38,8 +38,11 @@ module.exports = (pool) => {
 
   // category 1, 2, 3 etc...
   router.get("/todos/categories/:category_id", (req, res) => {
-    const category_id = req.params.category_id;
-    fetchTodoByCategory(category_id, req.session.user_id).then((data) => {
+    const inputObj = {
+      categoryId: req.params.category_id,
+      userId: req.session.user_id
+    }
+    fetchTodoByCategory(inputObj).then((data) => {
       const templateVars = {
         user_id: req.session.user_id,
         index: false,
@@ -50,11 +53,15 @@ module.exports = (pool) => {
   });
 
   router.get("/todos/:todo_id", (req, res) => {
-    fetchTodoByTodoId(req.params.todo_id, req.session.user_id)
+    const inputObj = {
+      todoId: req.params.todo_id,
+      userId: req.session.user_id
+    }
+    fetchTodoByTodoId(inputObj)
       .then((data) => {
         const templateVars = {
-          user_id: req.session.user_id,
-          todo_id: req.params.todo_id,
+          user_id: inputObj.userId,
+          todo_id: inputObj.todoId,
           index: false,
           todo: data.rows[0]
         };
@@ -64,11 +71,13 @@ module.exports = (pool) => {
 
   // edit to do item
   router.post("/todos/:todo_id/:column_name", (req, res) => {
-    const userId = req.session.user_id;
-    const todoId = req.params.todo_id;
-    const columnName = req.params.column_name;
-    const attribute = req.body.dbIndex
-    updateTodoTable(userId, todoId, columnName, attribute)
+    const input = {
+      userId: req.session.user_id,
+      todoId: req.params.todo_id,
+      columnName: req.params.column_name,
+      attribute: req.body.dbIndex
+    }
+    updateTodoTable(input)
       .then(() => {
         res.redirect("/todos/categories");
       })
@@ -89,7 +98,7 @@ module.exports = (pool) => {
         deadline: req.body.deadline,
       },
     };
-     if (inputObj.todoInput) {
+    if (inputObj.todoInput) {
       newTodoQuery(inputObj).then((returnObj) => {
         pool.query(returnObj.str, returnObj.arr)
           .then((data) => {

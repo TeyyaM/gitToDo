@@ -1,6 +1,7 @@
 const generateTodoHelpers = (pool) => {
 
-  const fetchTodoByCategory = (categoryId, userId) => {
+  const fetchTodoByCategory = (inputObj) => {
+    const { categoryId, userId } = inputObj;
     const queryParams = [userId];
     let query = `SELECT todos.id, todos.name, deadline, categories.name as category_name
     FROM todos
@@ -13,7 +14,8 @@ const generateTodoHelpers = (pool) => {
     return pool.query(query, queryParams);
   };
 
-  const fetchTodoByTodoId = (todoId, userId) => {
+  const fetchTodoByTodoId = (inputObj) => {
+    const { todoId, userId } = inputObj;
     const query = `SELECT todos.name, todos.deadline, todos.date_added,
     todos.date_completed, todos.note, categories.name as category
     FROM todos
@@ -23,7 +25,8 @@ const generateTodoHelpers = (pool) => {
     return pool.query(query, queryParams);
   };
 
-  const updateTodoTable = (userId, todoId, columnName, attribute) => {
+  const updateTodoTable = (inputObj) => {
+    const { userId, todoId, columnName, attribute } = inputObj;
     let queryParams = [userId, todoId];
     let queryString = '';
     if (columnName === 'delete') {
