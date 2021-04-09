@@ -45,7 +45,6 @@ module.exports = (pool) => {
         index: false,
         todos: data.rows,
       };
-      console.log("TODOS", data.rows);
       res.render("todo_list", templateVars);
     });
   });
@@ -90,14 +89,11 @@ module.exports = (pool) => {
         deadline: req.body.deadline,
       },
     };
-    if (!inputObj.todoInput) {
-      // Important! Add error message later
-      console.log("Empty Todo!");
-    } else {
+     if (inputObj.todoInput) {
       newTodoQuery(inputObj).then((returnObj) => {
         pool.query(returnObj.str, returnObj.arr)
           .then((data) => {
-            // get user_id and the todo's id from data RETURNING data
+            // get user_id and the todo's id from RETURNING data
             res.redirect(
               `/todos/${data.rows[0].id}`
             );
