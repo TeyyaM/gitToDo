@@ -10,9 +10,8 @@ const omdbKey = process.env.omdb_key;
 const yelpKey = process.env.yelpKey;
 const shopKey = process.env.shop_key;
 
-
-const checkYelp = (string) => {
-  fetch('https://api.ipify.org?format=json')
+async function checkYelp(string) {
+  const request = await fetch('https://api.ipify.org?format=json')
     .then(res => res.json())
     .then(json => fetch(`https://freegeoip.app/json/${json.ip}`))
     .then(res => res.json())
@@ -22,14 +21,17 @@ const checkYelp = (string) => {
         latitude: location.latitude,
         longitude: location.longitude
       };
-      const client = yelp.client(yelpKey);
 
-      return client.search(searchRequest).then(response => {
-        const firstResult = response.jsonBody.businesses[0];
-        const prettyJson = JSON.stringify(firstResult, null, 4);
-        return JSON.parse(prettyJson).name;
-      })
-    })
+      return searchRequest;
+    });
+
+  const client = yelp.client(yelpKey);
+
+  return client.search(request).then(response => {
+    const firstResult = response.jsonBody.businesses[0];
+    const prettyJson = JSON.stringify(firstResult, null, 4);
+    return JSON.parse(prettyJson).name;
+  })
     .catch(() => {
       return 'yelp api error';
     });
