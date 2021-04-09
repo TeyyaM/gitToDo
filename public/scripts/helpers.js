@@ -67,7 +67,6 @@ const newTodoQuery = (inputObj) => {
         queryMid += `, $${queryArr.length}`;
       }
     }
-    console.log('before return');
     const queryObj = {
       str: queryStart + queryMid + queryEnd,
       arr: queryArr
