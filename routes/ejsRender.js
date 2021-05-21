@@ -95,8 +95,8 @@ module.exports = (pool) => {
       // Parameters not required for a todo to be INSERTED
       optional: {
         note: req.body.note,
-        deadline: req.body.deadline,
-      },
+        deadline: req.body.deadline
+      }
     };
     if (inputObj.todoInput) {
       newTodoQuery(inputObj).then((returnObj) => {

@@ -31,6 +31,7 @@ async function findCategory(input) {
 
   // will call apis and check similarities in order, if there is a perfect match, it returns
   for (const key in categories) {
+
     const keyObj = categories[key]
     keyObj.name = await keyObj.apiFunc(string);
     keyObj.similarity = stringSimilarity.compareTwoStrings(string, keyObj.name.toLowerCase());
@@ -59,7 +60,7 @@ const newTodoQuery = (inputObj) => {
     let queryEnd = ') RETURNING id, user_id';
     // get category and specific name from APIS
     const queryArr = [inputObj.user_id, returnObj.category, returnObj.name];
-    for (key in inputObj.optional) {
+    for (const key in inputObj.optional) {
       if (inputObj.optional[key]) {
         queryArr.push(inputObj.optional[key]);
         queryStart += `, ${key}`
