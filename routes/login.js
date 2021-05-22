@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const cookieSession = require("cookie-session");
+// const cookieSession = require("cookie-session");
 
 module.exports = (db) => {
   router.get("/:user_id", (req, res) => {

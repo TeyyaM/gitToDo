@@ -8,7 +8,8 @@ const imdb = require('imdb-api');
 
 const omdbKey = process.env.omdb_key;
 const yelpKey = process.env.yelpKey;
-const shopKey = process.env.shop_key;
+// Unused because we couldn't find a free one
+// const shopKey = process.env.shop_key;
 
 async function checkYelp(string) {
   const request = await fetch('https://api.ipify.org?format=json')

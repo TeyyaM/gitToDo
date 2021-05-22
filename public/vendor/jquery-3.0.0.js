@@ -4891,7 +4891,7 @@ jQuery.event = {
 
 				// Discard the second event of a jQuery.event.trigger() and
 				// when an event is called after a page has unloaded
-				return typeof jQuery !== "undefined" && jQuery.event.triggered !== e.type ?
+				return typeof jQuery && jQuery.event.triggered !== e.type ?
 					jQuery.event.dispatch.apply( elem, arguments ) : undefined;
 			};
 		}
@@ -7097,7 +7097,7 @@ jQuery.fn.extend( {
 			clearQueue = type;
 			type = undefined;
 		}
-		if ( clearQueue && type !== false ) {
+		if ( clearQueue && type ) {
 			this.queue( type || "fx", [] );
 		}
 
@@ -7138,7 +7138,7 @@ jQuery.fn.extend( {
 		} );
 	},
 	finish: function( type ) {
-		if ( type !== false ) {
+		if ( type ) {
 			type = type || "fx";
 		}
 		return this.each( function() {
